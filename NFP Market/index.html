@@ -387,168 +387,115 @@
                     </li>
                 </ul>
             </div>
-            </div>
         </nav>
         <!-- End Navbar -->
         <div class="row justify-content-center">
             <div class="col-sm-3 justify-content-center">
                 <div class="card">
-                        <div class="uk-card-header">
-                            <h3 class="uk-card-title text-center">Common (#/500)</h3>
-                        </div>
-                        <div class="uk-card-body"><img src="https://via.placeholder.com/500" class="img-fluid"></div>
-                        <div class="uk-card-footer text-center"><h3>Current Price: $</h3>
-                            <h5>Use as a Bridge Pass.</h5> <a href="https://github.com/captnocap/GasStationCrypto/blob/main/The%20Gas%20Station%20White%20Paper%20v1.1.1.pdf">Learn More</a></div>
+                    <div class="uk-card-header">
+                        <h3 class="uk-card-title text-center">Common (<span id="common-minted"></span>/<span
+                                id="common-total"></span>)</h3>
+                    </div>
+                    <div class="uk-card-body">
+                        <img src="img/nfps.gif" class="img-fluid" />
+                    </div>
+                    <div class="uk-card-footer text-center">
+                        <h3>Current Price: <span id="common-price"></span></h3>
+                        <h5>Use as a Bridge Pass.</h5>
+                        <a
+                            href="https://github.com/captnocap/GasStationCrypto/blob/main/The%20Gas%20Station%20White%20Paper%20v1.1.1.pdf">Learn
+                            More</a>
                     </div>
                 </div>
-                    <div class="col-sm-3 justify-content-center">
+            </div>
+            <div class="col-sm-3 justify-content-center">
                 <div class="card">
-                        <div class="uk-card-header">
-                            <h3 class="uk-card-title text-center">Rare (#/38)</h3>
-                        </div>
-                        <div class="uk-card-body"><img src="https://via.placeholder.com/500" class="img-fluid"></div>
-                        <div class="uk-card-footer text-center"><h3>Current Price: $$</h3>
-                            <h5>Staking Rewards For USDC, Bridge Pass.</h5> <a href="https://github.com/captnocap/GasStationCrypto/blob/main/The%20Gas%20Station%20White%20Paper%20v1.1.1.pdf">Learn More</a></div>
+                    <div class="uk-card-header">
+                        <h3 class="uk-card-title text-center">Rare (<span id="rare-minted"></span>/<span
+                                id="rare-total"></span>)</h3>
+                    </div>
+                    <div class="uk-card-body" style="height: 392px;">
+                        <h3>
+                            <p id="countdown1" class="text-center font-weight-bold"></p>
+                        </h3>
+                    </div>
+                    <div class="uk-card-footer text-center">
+                        <h3>Current Price: <span id="rare-price"></span></h3>
+                        <h5>Staking Rewards For USDC, Bridge Pass.</h5>
+                        <a
+                            href="https://github.com/captnocap/GasStationCrypto/blob/main/The%20Gas%20Station%20White%20Paper%20v1.1.1.pdf">Learn
+                            More</a>
                     </div>
                 </div>
-                <div class="col-sm-3 justify-content-center">
+            </div>
+            <div class="col-sm-3 justify-content-center">
                 <div class="card">
-                        <div class="uk-card-header">
-                            <h3 class="uk-card-title text-center">Legendary (#/12)</h3>
-                        </div>
-                        <div class="uk-card-body"><img src="https://via.placeholder.com/500" class="img-fluid"></div>
-                        <div class="uk-card-footer text-center"><h3>Current Price: $$$</h3>
-                        <h5>Staking Rewards For USDC, Bridge Pass.</h5> <a href="https://github.com/captnocap/GasStationCrypto/blob/main/The%20Gas%20Station%20White%20Paper%20v1.1.1.pdf">Learn More</a></div>
+                    <div class="uk-card-header">
+                        <h3 class="uk-card-title text-center">Legendary (<span id="legendary-minted"></span>/<span
+                                id="legendary-total"></span>)</h3>
+                    </div>
+                    <div class="uk-card-body" style="height: 392px;">
+                        <h3>
+                            <p id="countdown2" class="text-center font-weight-bold"></p>
+                        </h3>
+                    </div>
+                    <div class="uk-card-footer text-center">
+                        <h3>Current Price: <span id="legendary-price"></span></h3>
+                        <h5>Staking Rewards For USDC, Bridge Pass.</h5>
+                        <a
+                            href="https://github.com/captnocap/GasStationCrypto/blob/main/The%20Gas%20Station%20White%20Paper%20v1.1.1.pdf">Learn
+                            More</a>
                     </div>
                 </div>
             </div>
             <div class="container">
-            <div class="row justify-content-center gy-5">
-                <div class="col-sm-2 justify-content-center">
-                    <div class="btn-group justify-content-center" role="group" aria-label="Button group with nested dropdown">
-                        <button type="button" class="btn btn-primary">Mint</button>
-                        
-                      
-                        <div class="btn-group" role="group">
-                          <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Mint Rarity
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            <li><a class="dropdown-item" href="#">Common Mint</a></li>
-                            <li><a class="dropdown-item" href="#">Rare Mint</a></li>
-                            <li><a class="dropdown-item" href="#">Legendary Mint</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                </div>
+                &nbsp;
             </div>
-        </div>
-                <div class="container" role="mycollection">
-                    <div class="row justify-content-center">
-                        <h3>My Collection</h3>
-                        <div class="col-sm-2">
-                            <div class="card">
-                                <div class="uk-card-header">
-                                    <h3 class="uk-card-title text-center">Mint ##</h3>
-                                </div>
-                                <div class="uk-card-body"><img src="https://via.placeholder.com/250" class="img-fluid"></div>
+            <div class="container">
+                <div class="row justify-content-center gy-5">
+                    <div class="col-sm-2 justify-content-center">
+                        <div class="btn-group justify-content-center" role="group"
+                            aria-label="Button group with nested dropdown">
+                            <button type="button" class="btn btn-primary mint-button" disabled="disabled">Mint</button>
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Mint Rarity
+                                </button>
+                                <ul class="dropdown-menu rarity-toggle" aria-labelledby="btnGroupDrop1">
+                                    <li><a class="dropdown-item" href="#" rarity="1">Common Mint</a></li>
+                                    <li><a class="dropdown-item" href="#" rarity="2">Rare Mint</a></li>
+                                    <li><a class="dropdown-item" href="#" rarity="3">Legendary Mint</a></li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="col-sm-2">
-                            <div class="card">
-                                <div class="uk-card-header">
-                                    <h3 class="uk-card-title text-center">Mint ##</h3>
-                                </div>
-                                <div class="uk-card-body"><img src="https://via.placeholder.com/250" class="img-fluid"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="card">
-                                <div class="uk-card-header">
-                                    <h3 class="uk-card-title text-center">Mint ##</h3>
-                                </div>
-                                <div class="uk-card-body"><img src="https://via.placeholder.com/250" class="img-fluid"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="card">
-                                <div class="uk-card-header">
-                                    <h3 class="uk-card-title text-center">Mint ##</h3>
-                                </div>
-                                <div class="uk-card-body"><img src="https://via.placeholder.com/250" class="img-fluid"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="card">
-                                <div class="uk-card-header">
-                                    <h3 class="uk-card-title text-center">Mint ##</h3>
-                                </div>
-                                <div class="uk-card-body"><img src="https://via.placeholder.com/250" class="img-fluid"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="card">
-                                <div class="uk-card-header">
-                                    <h3 class="uk-card-title text-center">Mint ##</h3>
-                                </div>
-                                <div class="uk-card-body"><img src="https://via.placeholder.com/250" class="img-fluid"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2 gy-2">
-                            <div class="card">
-                                <div class="uk-card-header">
-                                    <h3 class="uk-card-title text-center">Mint ##</h3>
-                                </div>
-                                <div class="uk-card-body"><img src="https://via.placeholder.com/250" class="img-fluid"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2 gy-2">
-                            <div class="card">
-                                <div class="uk-card-header">
-                                    <h3 class="uk-card-title text-center">Mint ##</h3>
-                                </div>
-                                <div class="uk-card-body"><img src="https://via.placeholder.com/250" class="img-fluid"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2 gy-2">
-                            <div class="card">
-                                <div class="uk-card-header">
-                                    <h3 class="uk-card-title text-center">Mint ##</h3>
-                                </div>
-                                <div class="uk-card-body"><img src="https://via.placeholder.com/250" class="img-fluid"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2 gy-2">
-                            <div class="card">
-                                <div class="uk-card-header">
-                                    <h3 class="uk-card-title text-center">Mint ##</h3>
-                                </div>
-                                <div class="uk-card-body"><img src="https://via.placeholder.com/250" class="img-fluid"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2 gy-2">
-                            <div class="card">
-                                <div class="uk-card-header">
-                                    <h3 class="uk-card-title text-center">Mint ##</h3>
-                                </div>
-                                <div class="uk-card-body"><img src="https://via.placeholder.com/250" class="img-fluid"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2 gy-2">
-                            <div class="card">
-                                <div class="uk-card-header">
-                                    <h3 class="uk-card-title text-center">Mint ##</h3>
-                                </div>
-                                <div class="uk-card-body"><img src="https://via.placeholder.com/250" class="img-fluid"></div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
-           
-         <div><img src="./assets/img/gascanbanner.png" class="img-fluid" alt="Responsive image">
             </div>
-         </div>
+            <div class="container">
+                &nbsp;
+            </div>
+            <div class="container my-collection-holder" role="mycollection">
+                <div class="row justify-content-center nfp-collection">
+                    <h3>My Collection</h3>
+                    <div id="nfp-item" class="col-sm-2">
+                        <div class="card">
+                            <div class="uk-card-header">
+                                <h3 class="uk-card-title text-center"></h3>
+                            </div>
+                            <div class="uk-card-body"><img src="https://via.placeholder.com/250" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                &nbsp;
+            </div>
+            <div>
+                <img src="./assets/img/gascanbanner.png" class="img-fluid" alt="Responsive image">
+            </div>
+        </div>
         <footer class="footer pt-3  ">
             <div class="container-fluid">
                 <div class="row align-items-center justify-content-lg-between">
@@ -611,6 +558,39 @@
             </div>
         </div>
     </div>
+    <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date("Sept 25, 2021 15:00:00").getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function () {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Output the result in an element with id="demo"
+            document.getElementById("countdown1").innerHTML = days + "d " + hours + "h "
+                + minutes + "m " + seconds + "s ";
+            document.getElementById("countdown2").innerHTML = days + "d " + hours + "h "
+                + minutes + "m " + seconds + "s ";
+
+            // If the count down is over, write some text 
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown1").innerHTML = "FINISHED";
+                document.getElementById("countdown2").innerHTML = "FINISHED";
+            }
+        }, 1000);
+    </script>
     <!--   Core JS Files   -->
     <script src="./assets/js/core/popper.min.js"></script>
     <script src="./assets/js/core/bootstrap.min.js"></script>
@@ -639,48 +619,83 @@
     <!-- Start Required Data Scripts -->
     <script src="https://cdn.ethers.io/lib/ethers-5.1.umd.min.js" type="text/javascript"></script>
     <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
-    <script src="./assets/js/tokens.js"></script>
+    <script src="./assets/js/market.js"></script>
     <!-- End Required Data Scripts -->
     <!-- Start UI Specific Setup Scripts -->
     <script type="text/javascript">
-        const bridgeExitLiquidity = $('.bridge-exit-liquidity');
-        let loadedValues = {};
-        let lastLoaded = 0;
+        const rarityToggle = $('.rarity-toggle');
+        const mintBtn = $('.mint-button');
+        const mintType = $('#btnGroupDrop1')
+        const nfpItem = $('#nfp-item').clone();
+        $('#nfp-item').remove();
+        const collection = $('.nfp-collection');
+        let rarity = null;
 
-        function loadValues(cb) {
-            if (lastLoaded > Date.now() - 5 * 60 * 1000) {
-                return cb(loadedValues);
+        const updateMintButton = () => {
+            updateCanPurchase(rarity)
+
+            const stats = getStats();
+
+            if (rarity != null && stats.canPurchase[rarity]) {
+                mintBtn.removeAttr('disabled');
+            } else {
+                mintBtn.attr('disabled', 'disabled');
             }
 
-            $.getJSON('./values.json', function (data) {
-                lastLoaded = Date.now();
+            if (stats.canPurchase[rarity] && stats.needsApproval[rarity]) {
+                mintBtn.html('Approve');
+            } else {
+                if (stats.canPurchase[rarity] && !stats.hasUSDC[rarity]) {
+                    mintBtn.html('Not Enough USDC');
+                    mintBtn.attr('disabled', 'disabled');
+                } else {
+                    mintBtn.html('Mint');
+                }
+            }
+        };
 
-                loadedValues = data;
+        rarityToggle.find('.dropdown-item').on('click', function (e) {
+            e.preventDefault();
 
-                cb(loadedValues);
-            });
-        }
+            mintType.html($(this).html());
+            rarity = parseInt($(this).attr('rarity'));
 
-        function updateBridgeStatuses(network) {
-            loadValues(function (data) {
-                const optimalFunding = data.optimalFunding;
-                const bridgeExits = Object.keys(data.chains).filter(b => b != network);
+            updateMintButton();
+        });
 
-                bridgeExitLiquidity.find('.bridge-from').text(data.chains[network].name);
+        mintBtn.on('click', function (e) {
+            e.preventDefault();
 
-                bridgeExits.forEach((bridge, i) => {
-                    const bridgeLine = $(bridgeExitLiquidity[i]);
+            if (rarity == null || !stats.canPurchase[rarity] || !stats.hasUSDC[rarity]) {
+                return;
+            }
 
-                    bridgeLine.find('.bridge-to').text(data.chains[bridge].name);
-                    bridgeLine.find('.bridge-status').text(data.chains[bridge].status);
-                    bridgeLine.find('.bridge-funded').text(numeral(data.chains[bridge].funded).format('$0,0.00 a'));
-                    bridgeLine.find('.bridge-percent').text(numeral(data.chains[bridge].funded / optimalFunding).format('0%'));
-                    bridgeLine.find('.bridge-complete').attr('aria-valuenow', numeral(Math.floor(data.chains[bridge].funded / optimalFunding * 100)).format('0'));
-                });
-            });
-        }
+            if (stats.canPurchase[rarity] && stats.needsApproval[rarity]) {
+                approveUSDC(rarity);
 
-        //const viewingAddress = $('#viewingAddreess');
+                let attempts = 0;
+
+                const checkAvailable = async () => {
+                    if (!stats.needsApproval[rarity]) {
+                        buyPatron(rarity);
+                        return;
+                    }
+
+                    if (attempts++ > 25) {
+                        return;
+                    }
+
+                    await refreshUSDCAllowance();
+
+                    setTimeout(checkAvailable, 5000);
+                };
+
+                checkAvailable();
+            } else {
+                buyPatron(rarity);
+            }
+        });
+
         const addTokenBtn = $('.add-token');
         const connectBtn = $('.connect-wallet');
 
@@ -688,41 +703,49 @@
         connectBtn.prop("disabled", true);
 
         $('.drop-down').hide();
-        $('.x24hr-volume').hide();
-        $('.price-1').hide();
         $('.network-select').on('change', (event) => {
             switchNetwork($('.network-select').val());
         });
 
         // Setups up connection/provider
         configure(() => {
-            updateBridgeStatuses(network);
-
             $('.network-specific').hide();
             $('.network-' + network).show();
             $('.network-select').val(network);
             $('.network-name').text(network == '56' ? "Binance Smart Chain" : "Polygon Network");
 
             const stats = getStats();
-            $('.totalgasrewardstext').text(numeral(stats.totalRewards).format('0,0.000') + (network == '56' ? ' BNB' : " MATIC"));
-            // $('dd#totalRewardsUSD').text(numeral(stats.totalRewardsUSD).format('$0,0.00 a'));
-            $('.mytokenbalancetext').text(numeral(stats.balance).format('0,0.000'));
-            $('.mytokenvaluetext').text(numeral(stats.balanceUSD).format('$0,0.00'));
-            $('.mygasrewardstext').text(numeral(stats.rewards).format('0,0.000') + (network == '56' ? ' BNB' : " MATIC"));
-            // $('dd#rewardsUSD').text(numeral(stats.rewardsUSD).format('$0,0.00 a'));
-            // $('.marketcapcode').text(numeral(stats.marketCap).format('$0,0.00 a'));
-            // $('.tradingvolumetext').text(numeral(stats.tradingVolume).format('0,0.000 a'));
-            $('.liquidityvaluetext').text(numeral(stats.lpValue).format('$0,0.00 a'));
-            // $('.address').text(numeral(stats.gasPrice).format('0') + " GWEI");
-            // $('dd#holders').text(numeral(stats.holders).format('0 a'));
-        }).then(() => {
-            // $('button#setAddress').click(() => {
-            //   setAddress($('input#address').val());
-            //   //viewingAddress.text(getAddress());
-            //   connectBtn.text('Clear Address');
-            //   loadStats();
-            // });
+            $('#common-price').text(numeral(stats.price[1]).format('$0,0') + " USDC");
+            $('#rare-price').text(numeral(stats.price[2]).format('$0,0') + " USDC");
+            $('#legendary-price').text(numeral(stats.price[3]).format('$0,0') + " USDC");
 
+
+            $('#common-minted').text(numeral(stats.amountMinted[1]).format('0'));
+            $('#rare-minted').text(numeral(stats.amountMinted[2]).format('0'));
+            $('#legendary-minted').text(numeral(stats.amountMinted[3]).format('0'));
+
+
+            $('#common-total').text(numeral(stats.amountTotal[1]).format('0'));
+            $('#rare-total').text(numeral(stats.amountTotal[2]).format('0'));
+            $('#legendary-total').text(numeral(stats.amountTotal[3]).format('0'));
+
+            const tokenIds = Object.keys(stats.nfps);
+
+            for (let tokenId of tokenIds) {
+                if (collection.find(`div[tokenId=${tokenId}]`).length > 0) {
+                    return;
+                }
+
+                var item = nfpItem.clone();
+                $(item).attr('tokenId', tokenId);
+                $(item).find('.uk-card-title').html(stats.nfps[tokenId].name);
+                $(item).find('.uk-card-body img').attr('src', stats.nfps[tokenId].image);
+
+                collection.append(item);
+            }
+
+            updateMintButton();
+        }).then(() => {
             addTokenBtn.prop("disabled", !isConnected());
             addTokenBtn.click(() => {
                 console.log('here');
@@ -731,17 +754,7 @@
 
             connectBtn.prop("disabled", !isConnected());
             connectBtn.click(() => {
-                // if (getAddress()) {
-                //   disconnect(() => {
-                //     //viewingAddress.text('Not Configured');
-                //     //connectBtn.text('Connect');
-                //   });
-                // } else {
-                connect(() => {
-                    //viewingAddress.text(getAddress());
-                    //connectBtn.text('Disconnect');
-                });
-                //}
+                connect(() => { });
             });
         });
     </script>
