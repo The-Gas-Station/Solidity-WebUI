@@ -382,11 +382,11 @@ function updateCanPurchase(rarity) {
         stats.internal.amountTotal[rarity] >
         stats.internal.amountMinted[rarity];
       stats.hasUSDC[rarity] =
-        !stats.internal.usdcAmount ||
-        stats.internal.usdcAmount >= stats.internal.price[rarity];
+        stats.internal.usdcAmount &&
+        stats.internal.usdcAmount.gte(stats.internal.price[rarity]);
       stats.needsApproval[rarity] =
         !stats.internal.usdcAllowance ||
-        stats.internal.usdcAllowance < stats.internal.price[rarity];
+        stats.internal.usdcAllowance.lt(stats.internal.price[rarity]);
     }
   } else {
     stats.canPurchase[rarity] = false;
