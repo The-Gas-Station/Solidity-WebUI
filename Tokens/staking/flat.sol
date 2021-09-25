@@ -576,6 +576,8 @@ contract StakingPool is Ownable, Initializable {
         uint256 allocPoint;       // How many allocation points assigned to this pool. Rewards to distribute per block.
         uint256 lastRewardBlock;  // Last block number that Rewards distribution occurs.
         uint256 accRewardTokenPerShare; // Accumulated Rewards per share, times 1e30. See below.
+        uint16 depositFee;
+        uint256 
     }
     receive() external payable {
         WithdrawEther;
@@ -602,6 +604,8 @@ contract StakingPool is Ownable, Initializable {
     uint256 public startBlock;
 	// The block number when mining ends.
     uint256 public bonusEndBlock;
+    // Deposit Fee address
+    address public feeAddress;
 
     event Deposit(address indexed user, uint256 amount);
     event DepositRewards(uint256 amount);
@@ -612,13 +616,16 @@ contract StakingPool is Ownable, Initializable {
     event EmergencyRewardWithdraw(address indexed user, uint256 amount);
     event EmergencySweepWithdraw(address indexed user, IERC20 indexed token, uint256 amount);
     event WithdrawEther(address indexed user, uint256 amount);
-    
+    event SetFeeAddress(address indexed user, address indexed newAddress);
+
     function initialize(
         IERC20 _stakeToken,
         IERC20 _rewardToken,
         uint256 _rewardPerBlock,
         uint256 _startBlock,
-        uint256 _bonusEndBlock
+        uint256 _bonusEndBlock,
+        uint16 _depositFee
+        address _feeAddress
     ) external initializer
     {
         STAKE_TOKEN = _stakeToken;
@@ -626,6 +633,8 @@ contract StakingPool is Ownable, Initializable {
         rewardPerBlock = _rewardPerBlock;
         startBlock = _startBlock;
         bonusEndBlock = _bonusEndBlock;
+        depositFee = _depositFee
+        feeAddress = _feeAddress
 
         // staking pool
         poolInfo = PoolInfo({
@@ -633,6 +642,7 @@ contract StakingPool is Ownable, Initializable {
             allocPoint: 1000,
             lastRewardBlock: startBlock,
             accRewardTokenPerShare: 0
+            depositFee: _depositFee
         });
 
         totalAllocPoint = 1000;
@@ -692,6 +702,7 @@ contract StakingPool is Ownable, Initializable {
         UserInfo storage user = userInfo[msg.sender];
         uint256 finalDepositAmount = 0;
         updatePool();
+
         if (user.amount > 0) {
             uint256 pending = user.amount * poolInfo.accRewardTokenPerShare / 1e30 - user.rewardDebt;
             if(pending > 0) {
@@ -708,6 +719,10 @@ contract StakingPool is Ownable, Initializable {
         if (_amount > 0) {
             uint256 preStakeBalance = STAKE_TOKEN.balanceOf(address(this));
             poolInfo.lpToken.safeTransferFrom(address(msg.sender), address(this), _amount);
+             if (poolInfo.depositFee > 0) {
+                uint16 depositFee = _amount.mul(poolInfo.depositFee).div(10000);
+                poolInfo.lpToken.safeTransfer(feeAddress, depositFee);
+            } 
             finalDepositAmount = STAKE_TOKEN.balanceOf(address(this)) - preStakeBalance;
             user.amount = user.amount + finalDepositAmount;
             totalStaked = totalStaked + finalDepositAmount;
