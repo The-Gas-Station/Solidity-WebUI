@@ -422,59 +422,70 @@
         <div class="row justify-content-center">
             <div class="col-sm-3 justify-content-center">
                 <div class="card">
-                    <div class="uk-card-header">
+                    <div class="uk-card-header" style="height: 125px;">
                         <h3 class="uk-card-title text-center">Common (<span id="common-minted"></span>/<span
                                 id="common-total"></span>)</h3>
                     </div>
                     <div class="uk-card-body">
                         <img src="img/nfps.gif" class="img-fluid" />
                     </div>
-                    <div class="uk-card-footer text-center">
+                    <div class="uk-card-footer text-center"
+                        style="height: 175px; display: flex; flex-direction: column; justify-content: space-between;">
                         <h3>Current Price: <span id="common-price"></span></h3>
-                        <h5>Use as a Bridge Pass.</h5>
-                        <a
-                            href="https://github.com/captnocap/GasStationCrypto/blob/main/The%20Gas%20Station%20White%20Paper%20v1.1.1.pdf">Learn
-                            More</a>
+                        <div>
+                            <h5>Use as a Bridge Pass.</h5>
+                            <a
+                                href="https://github.com/captnocap/GasStationCrypto/blob/main/The%20Gas%20Station%20White%20Paper%20v1.1.1.pdf">Learn
+                                More</a>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-3 justify-content-center">
                 <div class="card">
-                    <div class="uk-card-header">
+                    <div class="uk-card-header" style="height: 125px;">
                         <h3 class="uk-card-title text-center">Rare (<span id="rare-minted"></span>/<span
                                 id="rare-total"></span>)</h3>
-                    </div>
-                    <div class="uk-card-body" style="height: 392px;">
                         <h3>
                             <p id="countdown1" class="text-center font-weight-bold"></p>
                         </h3>
                     </div>
-                    <div class="uk-card-footer text-center">
+                    <div class="uk-card-body">
+                        <img src="" class="img-fluid" id="rare-image" />
+                    </div>
+                    <div class="uk-card-footer text-center"
+                        style="height: 175px; display: flex; flex-direction: column; justify-content: space-between;">
                         <h3>Current Price: <span id="rare-price"></span></h3>
-                        <h5>Staking Rewards For USDC, Bridge Pass.</h5>
-                        <a
-                            href="https://github.com/captnocap/GasStationCrypto/blob/main/The%20Gas%20Station%20White%20Paper%20v1.1.1.pdf">Learn
-                            More</a>
+                        <div>
+                            <h5>Staking Rewards For USDC, Bridge Pass.</h5>
+                            <a
+                                href="https://github.com/captnocap/GasStationCrypto/blob/main/The%20Gas%20Station%20White%20Paper%20v1.1.1.pdf">Learn
+                                More</a>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-3 justify-content-center">
                 <div class="card">
-                    <div class="uk-card-header">
+                    <div class="uk-card-header" style="height: 125px;">
                         <h3 class="uk-card-title text-center">Legendary (<span id="legendary-minted"></span>/<span
                                 id="legendary-total"></span>)</h3>
-                    </div>
-                    <div class="uk-card-body" style="height: 392px;">
                         <h3>
                             <p id="countdown2" class="text-center font-weight-bold"></p>
                         </h3>
                     </div>
-                    <div class="uk-card-footer text-center">
+                    <div class="uk-card-body">
+                        <img src="" class="img-fluid" id="legendary-image" />
+                    </div>
+                    <div class="uk-card-footer text-center"
+                        style="height: 175px; display: flex; flex-direction: column; justify-content: space-between;">
                         <h3>Current Price: <span id="legendary-price"></span></h3>
-                        <h5>Staking Rewards For USDC, Bridge Pass.</h5>
-                        <a
-                            href="https://github.com/captnocap/GasStationCrypto/blob/main/The%20Gas%20Station%20White%20Paper%20v1.1.1.pdf">Learn
-                            More</a>
+                        <div>
+                            <h5>Staking Rewards For USDC, Bridge Pass.</h5>
+                            <a
+                                href="https://github.com/captnocap/GasStationCrypto/blob/main/The%20Gas%20Station%20White%20Paper%20v1.1.1.pdf">Learn
+                                More</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -483,7 +494,7 @@
             </div>
             <div class="container">
                 <div class="row justify-content-center gy-5">
-                    <div class="col-sm-2 justify-content-center">
+                    <div class="justify-content-center" style="display: flex; justify-content: center">
                         <div class="btn-group justify-content-center" role="group"
                             aria-label="Button group with nested dropdown">
                             <button type="button" class="btn btn-primary mint-button" disabled="disabled">Mint</button>
@@ -590,7 +601,7 @@
     </div>
     <script>
         // Set the date we're counting down to
-        var countDownDate = new Date("Sept 25, 2021 15:00:00").getTime();
+        var countDownDate = new Date("2021-09-25T22:00:00.000+00:00").getTime();
 
         // Update the count down every 1 second
         var x = setInterval(function () {
@@ -756,6 +767,29 @@
             $('#common-total').text(numeral(stats.amountTotal[1]).format('0'));
             $('#rare-total').text(numeral(stats.amountTotal[2]).format('0'));
             $('#legendary-total').text(numeral(stats.amountTotal[3]).format('0'));
+
+            if (stats.amountTotal[2] > stats.amountMinted[2]) {
+                $.getJSON(`https://raw.githubusercontent.com/The-Gas-Station/NFPs/main/NFPs/${network == '56' ? 'Binance%20Smart%20Chain' : 'Polygon'
+                    }/metadata/2/${stats.amountTotal[2] + 1}/index.json`, function (data) {
+                        $('#rare-image').attr('src', data.image)
+                    });
+            } else if (stats.amountTotal[2] < 1) {
+                $('#rare-image').attr('src', './img/softbg.png');
+            } else {
+                $('#rare-image').attr('src', '');
+            }
+
+            if (stats.amountTotal[3] > stats.amountMinted[3]) {
+                $.getJSON(`https://raw.githubusercontent.com/The-Gas-Station/NFPs/main/NFPs/${network == '56' ? 'Binance%20Smart%20Chain' : 'Polygon'
+                    }/metadata/3/${stats.amountTotal[3] + 1}/index.json`, function (data) {
+                        $('#legendary-image').attr('src', data.image)
+                    });
+            } else if (stats.amountTotal[3] < 1) {
+                $('#legendary-image').attr('src', './img/softbg.png');
+            } else {
+                $('#legendary-image').attr('src', '');
+            }
+
 
             const tokenIds = Object.keys(stats.nfps);
 
