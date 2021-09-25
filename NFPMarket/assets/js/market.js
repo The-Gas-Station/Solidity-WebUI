@@ -373,11 +373,7 @@ async function configure(statsUpdatedCallback) {
 
 function updateCanPurchase(rarity) {
   if (address) {
-    if (
-      stats.internal.price[rarity] &&
-      stats.internal.amountTotal[rarity] &&
-      stats.internal.amountMinted[rarity]
-    ) {
+    if (stats.internal.price[rarity] && stats.internal.amountTotal[rarity]) {
       stats.canPurchase[rarity] =
         stats.internal.amountTotal[rarity] >
         stats.internal.amountMinted[rarity];
