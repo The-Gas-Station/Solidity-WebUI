@@ -12,6 +12,8 @@ const tokens = {
     gasLpAddress: "0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16",
     stableDecimals: 18,
     blockExplorerUrls: ["https://www.bscscan.com/"],
+    countdownUrl: "https://bscscan.com/block/countdown/",
+    usdc: "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
   },
   137: {
     address: "0x840b5fc8c6dee2b1140174a3abdc215190426ccf",
@@ -26,8 +28,313 @@ const tokens = {
     gasLpAddress: "0xcd353F79d9FADe311fC3119B841e1f456b54e858",
     stableDecimals: 6,
     blockExplorerUrls: ["https://polygonscan.com/"],
+    countdownUrl: "https://polygonscan.com/block/countdown/",
+    usdc: "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
   },
 };
+
+const pools = {
+  56: [
+    {
+      address: "0xD9D8209dC88CB96D0a300C2ab2479608A8D1463d",
+      staked: "0x6fabfe7946b23da23ad51dc45167cc2cfd0ce70e",
+      reward: "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+      depositFee: 0,
+      startBlock: 11352000,
+      endBlock: 11555000,
+    },
+    {
+      address: "0x0124378207aF3E62D842f66B5af02dF5e4F9719C",
+      staked: "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+      reward: "0x6fabfe7946b23da23ad51dc45167cc2cfd0ce70e",
+      depositFee: 5,
+      startBlock: 11352000,
+      endBlock: 13555000,
+    },
+  ],
+  137: [
+    {
+      address: "0x2bc0bf8e98c7bbf08dd682b3ed0da50991aa66bd",
+      staked: "0x840B5FC8C6deE2b1140174a3ABdC215190426CCf",
+      reward: "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+      depositFee: 0,
+      startBlock: 19665000,
+      endBlock: 19933500,
+    },
+    {
+      address: "0x20024f775ab6bc96077c73fb2e45c8862ac35552",
+      staked: "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+      reward: "0x840B5FC8C6deE2b1140174a3ABdC215190426CCf",
+      depositFee: 5,
+      startBlock: 19665000,
+      endBlock: 22333500,
+    },
+  ],
+};
+
+const poolAbi = [
+  {
+    inputs: [],
+    name: "REWARD_TOKEN",
+    outputs: [
+      {
+        internalType: "contract IERC20",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "STAKE_TOKEN",
+    outputs: [
+      {
+        internalType: "contract IERC20",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "bonusEndBlock",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "startBlock",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256",
+      },
+    ],
+    name: "deposit",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "depositFee",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_user",
+        type: "address",
+      },
+    ],
+    name: "pendingReward",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "rewardBalance",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "rewardPerBlock",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "totalStakeTokenBalance",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "totalStaked",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "userInfo",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "rewardDebt",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountEth",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256",
+      },
+    ],
+    name: "withdraw",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
+
+const usdcAbi = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "spender",
+        type: "address",
+      },
+    ],
+    name: "allowance",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "balanceOf",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "spender",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "approve",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
 
 const lpAbi = [
   {
@@ -70,10 +377,58 @@ const gasReflectAbi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "spender",
+        type: "address",
+      },
+    ],
+    name: "allowance",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [{ internalType: "address", name: "account", type: "address" }],
     name: "balanceOf",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "spender",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "approve",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -145,6 +500,62 @@ const refreshData = {
     timeout: null,
     refreshing: false,
   },
+  blockData: {
+    timeout: null,
+    refreshing: false,
+  },
+  gasAllowance: {
+    timeout: null,
+    refreshing: false,
+  },
+  usdcAllowance: {
+    timeout: null,
+    refreshing: false,
+  },
+  usdcAmount: {
+    timeout: null,
+    refreshing: false,
+  },
+  poolStaked: {
+    0: {
+      timeout: null,
+      refreshing: false,
+    },
+    1: {
+      timeout: null,
+      refreshing: false,
+    },
+  },
+  poolRewards: {
+    0: {
+      timeout: null,
+      refreshing: false,
+    },
+    1: {
+      timeout: null,
+      refreshing: false,
+    },
+  },
+  totalStaked: {
+    0: {
+      timeout: null,
+      refreshing: false,
+    },
+    1: {
+      timeout: null,
+      refreshing: false,
+    },
+  },
+  rewardsPerBlock: {
+    0: {
+      timeout: null,
+      refreshing: false,
+    },
+    1: {
+      timeout: null,
+      refreshing: false,
+    },
+  },
 };
 
 let stats = {
@@ -159,7 +570,20 @@ let stats = {
   lpValue: "0",
   holders: "0",
   gasPrice: "5",
-  internal: {},
+  block: 0,
+  gasAllowance: 0,
+  usdcAllowance: 0,
+  usdcAmount: 0,
+  staked: { 0: 0, 1: 0 },
+  poolRewards: { 0: 0, 1: 0 },
+  totalStaked: { 0: 0, 1: 0 },
+  rewardsPerBlock: { 0: 0, 1: 0 },
+  internal: {
+    staked: {},
+    poolRewards: {},
+    totalStaked: {},
+    rewardsPerBlock: {},
+  },
 };
 
 function setAddress(addr) {
@@ -217,7 +641,20 @@ async function configure(statsUpdatedCallback) {
         lpValue: "0",
         holders: "0",
         gasPrice: "5",
-        internal: {},
+        block: 0,
+        gasAllowance: 0,
+        usdcAllowance: 0,
+        usdcAmount: 0,
+        staked: { 0: 0, 1: 0 },
+        poolRewards: { 0: 0, 1: 0 },
+        totalStaked: { 0: 0, 1: 0 },
+        rewardsPerBlock: { 0: 0, 1: 0 },
+        internal: {
+          staked: {},
+          poolRewards: {},
+          totalStaked: {},
+          rewardsPerBlock: {},
+        },
       };
     }
 
@@ -597,9 +1034,321 @@ async function refreshRewardsData() {
   }
 }
 
+async function refreshBlockData() {
+  if (refreshData.blockData.refreshing) {
+    return;
+  }
+
+  refreshData.blockData.refreshing = true;
+  clearTimeout(refreshData.blockData.timeout);
+
+  stats.block = (await tokens[network].provider.getBlock()).number;
+
+  const halfInterval = refreshInterval / 10;
+  refreshData.blockData.timeout = setTimeout(
+    refreshBlockData,
+    halfInterval + Math.random() * halfInterval
+  );
+  refreshData.blockData.refreshing = false;
+
+  if (statsUpdated) {
+    statsUpdated();
+  }
+}
+
+async function refreshGASAllowance() {
+  if (refreshData.gasAllowance.refreshing) {
+    return;
+  }
+
+  refreshData.gasAllowance.refreshing = true;
+  clearTimeout(refreshData.gasAllowance.timeout);
+
+  if (address) {
+    try {
+      const gasContract = new ethers.Contract(
+        tokens[network].address,
+        gasReflectAbi,
+        tokens[network].provider
+      );
+
+      const allowance = await gasContract.allowance(
+        address,
+        pools[network][0].address
+      );
+      stats.internal.gasAllowance = allowance;
+      stats.gasAllowance = ethers.utils.formatEther(allowance);
+    } catch (e) {
+      console.error(e);
+    }
+  } else {
+    stats.internal.gasAllowance = 0;
+    stats.gasAllowance = 0;
+  }
+
+  const halfInterval = refreshInterval / 2;
+  refreshData.gasAllowance.timeout = setTimeout(
+    refreshGASAllowance,
+    halfInterval + Math.random() * halfInterval
+  );
+  refreshData.gasAllowance.refreshing = false;
+
+  if (statsUpdated) {
+    statsUpdated();
+  }
+}
+
+async function refreshUSDCAllowance() {
+  if (refreshData.usdcAllowance.refreshing) {
+    return;
+  }
+
+  refreshData.usdcAllowance.refreshing = true;
+  clearTimeout(refreshData.usdcAllowance.timeout);
+
+  if (address) {
+    try {
+      const usdcContract = new ethers.Contract(
+        tokens[network].usdc,
+        usdcAbi,
+        tokens[network].provider
+      );
+
+      const allowance = await usdcContract.allowance(
+        address,
+        pools[network][1].address
+      );
+      stats.internal.usdcAllowance = allowance;
+      stats.usdcAllowance = ethers.utils.formatEther(
+        allowance.mul(
+          ethers.BigNumber.from(10).pow(18 - tokens[network].stableDecimals)
+        )
+      );
+    } catch (e) {
+      console.error(e);
+    }
+  } else {
+    stats.internal.usdcAllowance = 0;
+    stats.usdcAllowance = 0;
+  }
+
+  const halfInterval = refreshInterval / 2;
+  refreshData.usdcAllowance.timeout = setTimeout(
+    refreshUSDCAllowance,
+    halfInterval + Math.random() * halfInterval
+  );
+  refreshData.usdcAllowance.refreshing = false;
+
+  if (statsUpdated) {
+    statsUpdated();
+  }
+}
+
+async function refreshUSDCAmount() {
+  if (refreshData.usdcAmount.refreshing) {
+    return;
+  }
+
+  refreshData.usdcAmount.refreshing = true;
+  clearTimeout(refreshData.usdcAmount.timeout);
+
+  if (address) {
+    try {
+      const usdcContract = new ethers.Contract(
+        tokens[network].usdc,
+        usdcAbi,
+        tokens[network].provider
+      );
+
+      const balance = await usdcContract.balanceOf(address);
+      stats.internal.usdcAmount = balance;
+      stats.usdcAmount = ethers.utils.formatEther(
+        balance.mul(
+          ethers.BigNumber.from(10).pow(18 - tokens[network].stableDecimals)
+        )
+      );
+    } catch (e) {
+      console.error(e);
+    }
+  } else {
+    stats.internal.usdcAmount = 0;
+    stats.usdcAmount = 0;
+  }
+
+  const halfInterval = refreshInterval / 2;
+  refreshData.usdcAmount.timeout = setTimeout(
+    refreshUSDCAllowance,
+    halfInterval + Math.random() * halfInterval
+  );
+  refreshData.usdcAmount.refreshing = false;
+
+  if (statsUpdated) {
+    statsUpdated();
+  }
+}
+
+async function refreshStakedData(poolId) {
+  if (refreshData.poolStaked[poolId].refreshing) {
+    return;
+  }
+
+  refreshData.poolStaked[poolId].refreshing = true;
+  clearTimeout(refreshData.poolStaked[poolId].timeout);
+
+  if (address) {
+    try {
+      const poolContract = new ethers.Contract(
+        pools[network][poolId].address,
+        poolAbi,
+        tokens[network].provider
+      );
+
+      const info = await poolContract.userInfo(address);
+      stats.internal.staked[poolId] = info.amount;
+      stats.staked[poolId] = ethers.utils.formatEther(
+        info.amount.mul(
+          ethers.BigNumber.from(10).pow(
+            18 - (poolId == 0 ? 18 : tokens[network].stableDecimals)
+          )
+        )
+      );
+    } catch (e) {
+      console.error(e);
+    }
+  } else {
+    stats.internal.staked[poolId] = 0;
+    stats.staked[poolId] = 0;
+  }
+
+  const halfInterval = refreshInterval / 2;
+  refreshData.poolStaked[poolId].timeout = setTimeout(
+    () => refreshStakedData(poolId),
+    halfInterval + Math.random() * halfInterval
+  );
+  refreshData.poolStaked[poolId].refreshing = false;
+
+  if (statsUpdated) {
+    statsUpdated();
+  }
+}
+
+async function refreshPoolRewardsData(poolId) {
+  if (refreshData.poolRewards[poolId].refreshing) {
+    return;
+  }
+
+  refreshData.poolRewards[poolId].refreshing = true;
+  clearTimeout(refreshData.poolRewards[poolId].timeout);
+
+  if (address) {
+    try {
+      const poolContract = new ethers.Contract(
+        pools[network][poolId].address,
+        poolAbi,
+        tokens[network].provider
+      );
+
+      const rewards = await poolContract.pendingReward(address);
+      stats.internal.poolRewards[poolId] = rewards;
+      stats.poolRewards[poolId] =
+        rewards == 0
+          ? 0
+          : ethers.utils.formatEther(
+              rewards.mul(
+                ethers.BigNumber.from(10).pow(
+                  18 - (poolId == 1 ? 18 : tokens[network].stableDecimals)
+                )
+              )
+            );
+    } catch (e) {
+      console.error(e);
+    }
+  } else {
+    stats.internal.poolRewards[poolId] = 0;
+    stats.poolRewards[poolId] = 0;
+  }
+
+  const halfInterval = refreshInterval / 2;
+  refreshData.poolRewards[poolId].timeout = setTimeout(
+    () => refreshPoolRewardsData(poolId),
+    halfInterval + Math.random() * halfInterval
+  );
+  refreshData.poolRewards[poolId].refreshing = false;
+
+  if (statsUpdated) {
+    statsUpdated();
+  }
+}
+
+async function refreshTotalStakedData(poolId) {
+  if (refreshData.totalStaked[poolId].refreshing) {
+    return;
+  }
+
+  refreshData.totalStaked[poolId].refreshing = true;
+  clearTimeout(refreshData.totalStaked[poolId].timeout);
+
+  try {
+    const poolContract = new ethers.Contract(
+      pools[network][poolId].address,
+      poolAbi,
+      tokens[network].provider
+    );
+
+    const totalStaked = await poolContract.totalStaked();
+    stats.internal.totalStaked[poolId] = totalStaked;
+  } catch (e) {
+    console.error(e);
+  }
+
+  const halfInterval = refreshInterval / 2;
+  refreshData.totalStaked[poolId].timeout = setTimeout(
+    () => refreshTotalStakedData(poolId),
+    halfInterval + Math.random() * halfInterval
+  );
+  refreshData.totalStaked[poolId].refreshing = false;
+
+  if (statsUpdated) {
+    statsUpdated();
+  }
+}
+
+async function refreshRewardsPerBlockData(poolId) {
+  if (refreshData.rewardsPerBlock[poolId].refreshing) {
+    return;
+  }
+
+  refreshData.rewardsPerBlock[poolId].refreshing = true;
+  clearTimeout(refreshData.rewardsPerBlock[poolId].timeout);
+
+  try {
+    const poolContract = new ethers.Contract(
+      pools[network][poolId].address,
+      poolAbi,
+      tokens[network].provider
+    );
+
+    const rewardsPerBlock = await poolContract.rewardPerBlock();
+    stats.internal.rewardsPerBlock[poolId] = rewardsPerBlock;
+  } catch (e) {
+    console.error(e);
+  }
+
+  const halfInterval = refreshInterval / 2;
+  refreshData.rewardsPerBlock[poolId].timeout = setTimeout(
+    () => refreshRewardsPerBlockData(poolId),
+    halfInterval + Math.random() * halfInterval
+  );
+  refreshData.rewardsPerBlock[poolId].refreshing = false;
+
+  if (statsUpdated) {
+    statsUpdated();
+  }
+}
+
 async function loadStats() {
   if (tokens[network]) {
-    refreshGasPrice();
+    // refreshGasPrice();
 
     refreshGasValue();
     refreshLpData();
@@ -624,6 +1373,19 @@ async function loadStats() {
     refreshHoldersData();
     refreshBalanceData();
     refreshRewardsData();
+
+    refreshBlockData();
+    refreshGASAllowance();
+    refreshUSDCAllowance();
+    refreshUSDCAmount();
+    refreshStakedData(0);
+    refreshStakedData(1);
+    refreshPoolRewardsData(0);
+    refreshPoolRewardsData(1);
+    refreshTotalStakedData(0);
+    refreshTotalStakedData(1);
+    refreshRewardsPerBlockData(0);
+    refreshRewardsPerBlockData(1);
 
     if (statsUpdated) {
       statsUpdated();
@@ -710,7 +1472,20 @@ async function switchNetwork(_network, callback) {
     lpValue: "0",
     holders: "0",
     gasPrice: "5",
-    internal: {},
+    block: 0,
+    gasAllowance: 0,
+    usdcAllowance: 0,
+    usdcAmount: 0,
+    staked: { 0: 0, 1: 0 },
+    poolRewards: { 0: 0, 1: 0 },
+    totalStaked: { 0: 0, 1: 0 },
+    rewardsPerBlock: { 0: 0, 1: 0 },
+    internal: {
+      staked: {},
+      poolRewards: {},
+      totalStaked: {},
+      rewardsPerBlock: {},
+    },
   };
 
   if (statsUpdated) {
@@ -753,6 +1528,80 @@ async function registerToken() {
       } else {
         console.log("Your loss!");
       }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+async function approveGas() {
+  if (connected && tokens[network] && address) {
+    try {
+      const gasContract = new ethers.Contract(
+        tokens[network].address,
+        gasReflectAbi,
+        new ethers.providers.Web3Provider(provider).getSigner()
+      );
+
+      await gasContract.approve(
+        pools[network][0].address,
+        ethers.BigNumber.from(999999999).mul(
+          ethers.BigNumber.from(10).pow(18 + 6)
+        )
+      );
+    } catch (e) {
+      console.error(e);
+    }
+  }
+}
+
+async function approveUSDC() {
+  if (connected && tokens[network] && address) {
+    try {
+      const usdcContract = new ethers.Contract(
+        tokens[network].usdc,
+        usdcAbi,
+        new ethers.providers.Web3Provider(provider).getSigner()
+      );
+
+      await usdcContract.approve(
+        pools[network][1].address,
+        ethers.BigNumber.from(999999999).mul(
+          ethers.BigNumber.from(10).pow(tokens[network].stableDecimals + 6)
+        )
+      );
+    } catch (e) {
+      console.error(e);
+    }
+  }
+}
+
+async function deposit(poolId, amount) {
+  if (connected && tokens[network]) {
+    try {
+      const poolContract = new ethers.Contract(
+        pools[network][poolId].address,
+        poolAbi,
+        new ethers.providers.Web3Provider(provider).getSigner()
+      );
+
+      await poolContract.deposit(amount);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+async function withdraw(poolId, amount) {
+  if (connected && tokens[network]) {
+    try {
+      const poolContract = new ethers.Contract(
+        pools[network][poolId].address,
+        poolAbi,
+        new ethers.providers.Web3Provider(provider).getSigner()
+      );
+
+      await poolContract.withdraw(amount);
     } catch (error) {
       console.log(error);
     }
