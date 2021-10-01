@@ -622,6 +622,12 @@
                         </div>
                         <div class="card-body">
                             <div class="row justify-content-center">
+                                <div class="col">
+                                    <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                        type="button" id="gaspool-harvest">Harvest</button>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
                                 <div class="col-sm-3">
                                     <p>Staked:</p>
                                 </div>
@@ -644,7 +650,7 @@
                                     <h6 id="gaspool-depositfee"></h6>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p>APR: -</p>
+                                    <p>APR: <span id="gaspool-apr">-</span></p>
                                     <p><span id="gaspool-countdown"></span> <a id="gaspool-countdown-url"
                                             href="https://polygonscan.com/block/countdown/11555000" target="_blank"
                                             rel="noopener noreferrer"><i class="fas fa-stopwatch"></i></a></p>
@@ -658,18 +664,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row justify-content-center">
-                                <div class="col-sm-4">
-                                    <button class="btn btn-outline-secondary" type="button"
-                                        id="gaspool-stake">Stake</button>
+                            <div class="row justify-content-center p-3">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                        type="button" id="gaspool-stake">Stake</button>
                                 </div>
-                                <div class="col-sm-4">
-                                    <button class="btn btn-outline-secondary" type="button"
-                                        id="gaspool-withdraw">Withdraw</button>
+                                <div class="col-xs-12">
+                                    <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                        type="button" id="gaspool-withdraw">Withdraw</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer"></div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6 col-xs-12 justify-content-center p-3">
@@ -680,6 +685,12 @@
                                     id="usdcpool-reward-token">GAS</span></h6>
                         </div>
                         <div class="card-body">
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                        type="button" id="usdcpool-harvest">Harvest</button>
+                                </div>
+                            </div>
                             <div class="row justify-content-center">
                                 <div class="col-sm-3">
                                     <p>Staked:</p>
@@ -703,7 +714,7 @@
                                     <h6 id="usdcpool-depositfee"></h6>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p>APR: -</p>
+                                    <p>APR: <span id="usdcpool-apr">-</span></p>
                                     <p><span id="usdcpool-countdown"></span> <a id="usdcpool-countdown-url"
                                             href="https://polygonscan.com/block/countdown/11555000" target="_blank"
                                             rel="noopener noreferrer"><i class="fas fa-stopwatch"></i></a></p>
@@ -717,18 +728,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row justify-content-center">
-                                <div class="col-sm-4">
-                                    <button class="btn btn-outline-secondary" type="button"
-                                        id="usdcpool-stake">Stake</button>
+                            <div class="row justify-content-center p-3">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                        type="button" id="usdcpool-stake">Stake</button>
                                 </div>
-                                <div class="col-sm-4">
-                                    <button class="btn btn-outline-secondary" type="button"
-                                        id="usdcpool-withdraw">Withdraw</button>
+                                <div class="col-xs-12">
+                                    <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                        type="button" id="usdcpool-withdraw">Withdraw</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer"></div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6 col-xs-12 justify-content-center p-3">
@@ -740,6 +750,12 @@
                             </h6>
                         </div>
                         <div class="card-body">
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                        type="button" id="usdc2pool-harvest">Harvest</button>
+                                </div>
+                            </div>
                             <div class="row justify-content-center">
                                 <div class="col-sm-3 col-xs-9">
                                     <p>Staked:</p>
@@ -763,7 +779,7 @@
                                     <h6 id="usdc2pool-depositfee"></h6>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p>APR: -</p>
+                                    <p>APR: <span id="usdc2pool-apr">-</span></p>
                                     <p><span id="usdc2pool-countdown"></span> <a id="usdc2pool-countdown-url"
                                             href="https://polygonscan.com/block/countdown/11555000" target="_blank"
                                             rel="noopener noreferrer"><i class="fas fa-stopwatch"></i></a></p>
@@ -777,18 +793,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row justify-content-center">
-                                <div class="col-sm-4">
-                                    <button class="btn btn-outline-secondary" type="button"
-                                        id="usdc2pool-stake">Stake</button>
+                            <div class="row justify-content-center p-3">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                        type="button" id="usdc2pool-stake">Stake</button>
                                 </div>
-                                <div class="col-sm-4">
-                                    <button class="btn btn-outline-secondary" type="button"
-                                        id="usdc2pool-withdraw">Withdraw</button>
+                                <div class="col-xs-12">
+                                    <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                        type="button" id="usdc2pool-withdraw">Withdraw</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer"></div>
                     </div>
                 </div>
             </div>
@@ -1260,10 +1275,13 @@
 
         const gaspoolStake = $('#gaspool-stake');
         const gaspoolWithdraw = $('#gaspool-withdraw');
+        const gaspoolHarvest = $('#gaspool-harvest');
         const usdcpoolStake = $('#usdcpool-stake');
         const usdcpoolWithdraw = $('#usdcpool-withdraw');
+        const usdcpoolHarvest = $('#usdcpool-harvest');
         const usdc2poolStake = $('#usdc2pool-stake');
         const usdc2poolWithdraw = $('#usdc2pool-withdraw');
+        const usdc2poolHarvest = $('#usdc2pool-harvest');
 
         let gaspoolApproved = false;
         let usdcpoolApproved = false;
@@ -1277,6 +1295,30 @@
         $('.price-1').hide();
         $('.network-select').on('change', (event) => {
             switchNetwork($('.network-select').val());
+        });
+
+        gaspoolHarvest.on('click', () => {
+            updateAllowances();
+
+            if (stats.poolRewards[0]) {
+                deposit(0, 0);
+            }
+        });
+
+        usdcpoolHarvest.on('click', () => {
+            updateAllowances();
+
+            if (stats.poolRewards[1]) {
+                deposit(1, 0);
+            }
+        });
+
+        usdc2poolHarvest.on('click', () => {
+            updateAllowances();
+
+            if (stats.poolRewards[2]) {
+                deposit(2, 0);
+            }
         });
 
         gaspoolStake.on('click', () => {
@@ -1324,6 +1366,12 @@
         function updateAllowances() {
             const stats = getStats();
 
+            if (stats.poolRewards[0]) {
+                gaspoolHarvest.removeAttr('disabled');
+            } else {
+                gaspoolHarvest.attr('disabled', 'disabled');
+            }
+
             if (!gaspoolAmount.val()) {
                 gaspoolStake.attr('disabled', 'disabled');
                 gaspoolWithdraw.attr('disabled', 'disabled');
@@ -1345,6 +1393,12 @@
                 gaspoolStake.text('STAKE');
             }
 
+            if (stats.poolRewards[1]) {
+                usdcpoolHarvest.removeAttr('disabled');
+            } else {
+                usdcpoolHarvest.attr('disabled', 'disabled');
+            }
+
             if (!usdcpoolAmount.val()) {
                 usdcpoolStake.attr('disabled', 'disabled');
                 usdcpoolWithdraw.attr('disabled', 'disabled');
@@ -1364,6 +1418,12 @@
             } else {
                 usdcpoolApproved = true;
                 usdcpoolStake.text('STAKE');
+            }
+
+            if (stats.poolRewards[2]) {
+                usdc2poolHarvest.removeAttr('disabled');
+            } else {
+                usdc2poolHarvest.attr('disabled', 'disabled');
             }
 
             if (!usdc2poolAmount.val()) {
@@ -1446,20 +1506,20 @@
 
                 if (pools[network][1].startBlock > stats.block) {
                     usdcpoolCountdown.text(`Starts in ${pools[network][1].startBlock - stats.block}`);
-                    usdcpoolCountdown.attr('href', `${tokens[network].countdownUrl}${pools[network][1].startBlock}`);
+                    usdcpoolCountdownUrl.attr('href', `${tokens[network].countdownUrl}${pools[network][1].startBlock}`);
                 } else if (pools[network][1].endBlock > stats.block) {
                     usdcpoolCountdown.text(`Ends in ${pools[network][1].endBlock - stats.block}`);
-                    usdcpoolCountdown.attr('href', `${tokens[network].countdownUrl}${pools[network][1].endBlock}`);
+                    usdcpoolCountdownUrl.attr('href', `${tokens[network].countdownUrl}${pools[network][1].endBlock}`);
                 } else {
                     usdcpoolCountdown.parent().html('Finished!')
                 }
 
                 if (pools[network][2].startBlock > stats.block) {
                     usdc2poolCountdown.text(`Starts in ${pools[network][2].startBlock - stats.block}`);
-                    usdc2poolCountdown.attr('href', `${tokens[network].countdownUrl}${pools[network][2].startBlock}`);
+                    usdc2poolCountdownUrl.attr('href', `${tokens[network].countdownUrl}${pools[network][2].startBlock}`);
                 } else if (pools[network][2].endBlock > stats.block) {
                     usdc2poolCountdown.text(`Ends in ${pools[network][2].endBlock - stats.block}`);
-                    usdc2poolCountdown.attr('href', `${tokens[network].countdownUrl}${pools[network][2].endBlock}`);
+                    usdc2poolCountdownUrl.attr('href', `${tokens[network].countdownUrl}${pools[network][2].endBlock}`);
                 } else {
                     usdc2poolCountdown.parent().html('Finished!')
                 }
@@ -1476,6 +1536,66 @@
             $('#gaspool-rewards').text(numeral(stats.poolRewards[0]).format('0,0.000000'));
             $('#usdcpool-rewards').text(numeral(stats.poolRewards[1]).format('0,0.000'));
             $('#usdc2pool-rewards').text(numeral(stats.poolRewards[2]).format('0,0.000'));
+
+            let gaspoolApr = 0;
+            let usdcpoolApr = 0;
+            let usdc2poolApr = 0;
+
+            if (stats.internal.gasReflectValue && stats.internal.gasValue) {
+                if (stats.internal.rewardsPerBlock[0] && stats.internal.totalStaked[0] && stats.internal.totalStaked[0].gt(0)) {
+                    gaspoolApr = (
+                        stats.internal.rewardsPerBlock[0].mul(tokens[network].blocksPerYear).mul(
+                            ethers.BigNumber.from(10).pow(
+                                18 - tokens[network].stableDecimals
+                            )
+                        )
+                    ).mul(10000).div(
+                        stats.internal.totalStaked[0]
+                            .mul(stats.internal.gasReflectValue)
+                            .mul(stats.internal.gasValue)
+                            .div(decimals)
+                            .div(decimals)
+                    ).toNumber() / 10000;
+                }
+
+                if (stats.internal.rewardsPerBlock[1] && stats.internal.totalStaked[1] && stats.internal.totalStaked[1].gt(0)) {
+                    usdcpoolApr = (
+                        stats.internal.rewardsPerBlock[1].mul(tokens[network].blocksPerYear)
+                            .mul(stats.internal.gasReflectValue)
+                            .mul(stats.internal.gasValue)
+                            .div(decimals)
+                            .div(decimals)
+                    ).mul(10000).div(
+                        stats.internal.totalStaked[1]
+                            .mul(
+                                ethers.BigNumber.from(10).pow(
+                                    18 - tokens[network].stableDecimals
+                                )
+                            )
+                    ).toNumber() / 10000;
+                }
+
+                if (stats.internal.rewardsPerBlock[2] && stats.internal.totalStaked[2] && stats.internal.totalStaked[2].gt(0)) {
+                    usdc2poolApr = (
+                        stats.internal.rewardsPerBlock[2].mul(tokens[network].blocksPerYear)
+                            .mul(stats.internal.gasReflectValue)
+                            .mul(stats.internal.gasValue)
+                            .div(decimals)
+                            .div(decimals)
+                    ).mul(10000).div(
+                        stats.internal.totalStaked[2]
+                            .mul(
+                                ethers.BigNumber.from(10).pow(
+                                    18 - tokens[network].stableDecimals
+                                )
+                            )
+                    ).toNumber() / 10000;
+                }
+            }
+
+            $('#gaspool-apr').text(gaspoolApr > 0 ? numeral(gaspoolApr).format('0.00%') : '-');
+            $('#usdcpool-apr').text(usdcpoolApr > 0 ? numeral(usdcpoolApr).format('0.00%') : '-');
+            $('#usdc2pool-apr').text(usdc2poolApr > 0 ? numeral(usdc2poolApr).format('0.00%') : '-');
 
             updateAllowances();
         }).then(() => {

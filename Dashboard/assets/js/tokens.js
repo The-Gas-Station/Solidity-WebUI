@@ -14,6 +14,7 @@ const tokens = {
     blockExplorerUrls: ["https://www.bscscan.com/"],
     countdownUrl: "https://bscscan.com/block/countdown/",
     usdc: "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+    blocksPerYear: (60 / 3) * 60 * 24 * 365,
   },
   137: {
     address: "0x840b5fc8c6dee2b1140174a3abdc215190426ccf",
@@ -30,6 +31,7 @@ const tokens = {
     blockExplorerUrls: ["https://polygonscan.com/"],
     countdownUrl: "https://polygonscan.com/block/countdown/",
     usdc: "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    blocksPerYear: (60 / 2) * 60 * 24 * 365,
   },
 };
 
@@ -1340,7 +1342,7 @@ async function refreshPoolRewardsData(poolId) {
           : ethers.utils.formatEther(
               rewards.mul(
                 ethers.BigNumber.from(10).pow(
-                  18 - (poolId == 1 ? 18 : tokens[network].stableDecimals)
+                  18 - (poolId != 0 ? 18 : tokens[network].stableDecimals)
                 )
               )
             );
