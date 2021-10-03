@@ -613,12 +613,31 @@
                 </div>
             </div>
             <div class="row mt-4 justify-content-center">
+                <div class="col-lg-3 d-md-none"></div>
+                <div class="col-lg-3 col-sm-6 col-xs-12 justify-content-center p-3">
+                    <div class="card" card-default>
+                        <div class="card-body d-flex justify-content-between">
+                            <span>TVL:</span> <span id="tvl">$0.000</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-xs-12 justify-content-center p-3">
+                    <div class="card" card-default>
+                        <div class="card-body d-flex justify-content-between">
+                            <span>My Fuel Value:</span> <span id="myFuelValue">$0.000</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 d-md-none"></div>
+            </div>
+            <div class="row mt-4 justify-content-center">
                 <div class="col-lg-4 col-sm-6 col-xs-12 justify-content-center p-3">
                     <div class="card" card-default>
-                        <div class="card-header text-center">
+                        <div class="card-header text-center" style="padding-bottom: 0;">
                             <h5>GAS Fuel Tank</h5>
                             <h6>Stake <span id="gaspool-staked-token">GAS</span>, Earn <span
                                     id="gaspool-reward-token">USDC</span></h6>
+                            <p>Total Staked: <span id="gaspool-total-staked">0</span></p>
                         </div>
                         <div class="card-body">
                             <div class="row justify-content-center">
@@ -628,25 +647,36 @@
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-3">
+                                <div class="col-12">
                                     <p>Staked:</p>
                                 </div>
-                                <div class="col-sm-6">
-                                    <p><span id="gaspool-staked">0</span> <img src="./gas-logo.png"
-                                            class="avatar avatar me-3" alt="logo"></p>
+                                <div class="col-12">
+                                    <p class="d-flex justify-content-between">
+                                        <span>
+                                            <span id="gaspool-staked">0</span>
+                                            <br />
+                                            (<span id="gaspool-staked-usd">0</span>)
+                                        </span>
+                                        <img src="./token.svg" class="avatar avatar me-3" alt="logo">
+                                    </p>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-3">
+                                <div class="col-12">
                                     <p>Rewards:</p>
                                 </div>
-                                <div class="col-sm-6">
-                                    <p><span id="gaspool-rewards">0</span> <img src="./assets/img/usdc.png"
-                                            class="avatar avatar me-3" alt="logo"></p>
+                                <div class="col-12">
+                                    <p class="d-flex justify-content-between">
+                                        <span>
+                                            <span id="gaspool-rewards">0</span>
+                                        </span>
+                                        <img src="./assets/img/usdc.png" class="avatar avatar me-3" alt="logo">
+                                    </p>
                                 </div>
                             </div>
                             <div class="row justify-content-center text-center">
                                 <div class="col-sm-4">
+                                    <p>Deposit Fee:</p>
                                     <h6 id="gaspool-depositfee"></h6>
                                 </div>
                                 <div class="col-sm-6">
@@ -679,10 +709,11 @@
                 </div>
                 <div class="col-lg-4 col-sm-6 col-xs-12 justify-content-center p-3">
                     <div class="card" card-default>
-                        <div class="card-header text-center">
+                        <div class="card-header text-center" style="padding-bottom: 0;">
                             <h5>GAS Fuel Tank</h5>
                             <h6>Stake <span id="usdcpool-staked-token">USDC</span>, Earn <span
                                     id="usdcpool-reward-token">GAS</span></h6>
+                            <p>Total Staked: <span id="usdcpool-total-staked">0</span></p>
                         </div>
                         <div class="card-body">
                             <div class="row justify-content-center">
@@ -692,25 +723,36 @@
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-3">
+                                <div class="col-12">
                                     <p>Staked:</p>
                                 </div>
-                                <div class="col-sm-6">
-                                    <p><span id="usdcpool-staked">0</span> <img src="./assets/img/usdc.png"
-                                            class="avatar avatar me-3" alt="logo"></p>
+                                <div class="col-12">
+                                    <p class="d-flex justify-content-between">
+                                        <span>
+                                            <span id="usdcpool-staked">0</span>
+                                        </span>
+                                        <img src="./assets/img/usdc.png" class="avatar avatar me-3" alt="logo">
+                                    </p>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-3">
+                                <div class="col-12">
                                     <p>Rewards:</p>
                                 </div>
-                                <div class="col-sm-6">
-                                    <p><span id="usdcpool-rewards">0</span> <img src="./gas-logo.png"
-                                            class="avatar avatar me-3" alt="logo"></p>
+                                <div class="col-12">
+                                    <p class="d-flex justify-content-between">
+                                        <span>
+                                            <span id="usdcpool-rewards">0</span>
+                                            <br />
+                                            (<span id="usdcpool-rewards-usd">0</span>)
+                                        </span>
+                                        <img src="./token.svg" class="avatar avatar me-3" alt="logo">
+                                    </p>
                                 </div>
                             </div>
                             <div class="row justify-content-center text-center">
                                 <div class="col-sm-4">
+                                    <p>Deposit Fee:</p>
                                     <h6 id="usdcpool-depositfee"></h6>
                                 </div>
                                 <div class="col-sm-6">
@@ -743,11 +785,12 @@
                 </div>
                 <div class="col-lg-4 col-sm-6 col-xs-12 justify-content-center p-3">
                     <div class="card" card-default>
-                        <div class="card-header text-center">
+                        <div class="card-header text-center" style="padding-bottom: 0;">
                             <h5>GAS Fuel Tank</h5>
                             <h6>Stake <span id="usdc2pool-staked-token">USDC</span>, Earn <span
                                     id="usdc2pool-reward-token">GAS</span>
                             </h6>
+                            <p>Total Staked: <span id="usdc2pool-total-staked">0</span></p>
                         </div>
                         <div class="card-body">
                             <div class="row justify-content-center">
@@ -757,25 +800,36 @@
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-3 col-xs-9">
+                                <div class="col-12">
                                     <p>Staked:</p>
                                 </div>
-                                <div class="col-sm-6 col-xs-9">
-                                    <p><span id="usdc2pool-staked">0</span> <img src="./assets/img/usdc.png"
-                                            class="avatar avatar me-3" alt="logo"></p>
+                                <div class="col-12">
+                                    <p class="d-flex justify-content-between">
+                                        <span>
+                                            <span id="usdc2pool-staked">0</span>
+                                        </span>
+                                        <img src="./assets/img/usdc.png" class="avatar avatar me-3" alt="logo">
+                                    </p>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-sm-3">
+                                <div class="col-12">
                                     <p>Rewards:</p>
                                 </div>
-                                <div class="col-sm-6">
-                                    <p><span id="usdc2pool-rewards">0</span> <img src="./gas-logo.png"
-                                            class="avatar avatar me-3" alt="logo"></p>
+                                <div class="col-12">
+                                    <p class="d-flex justify-content-between">
+                                        <span>
+                                            <span id="usdc2pool-rewards">0</span>
+                                            <br />
+                                            (<span id="usdc2pool-rewards-usd">0</span>)
+                                        </span>
+                                        <img src="./token.svg" class="avatar avatar me-3" alt="logo">
+                                    </p>
                                 </div>
                             </div>
                             <div class="row justify-content-center text-center">
                                 <div class="col-sm-4">
+                                    <p>Deposit Fee:</p>
                                     <h6 id="usdc2pool-depositfee"></h6>
                                 </div>
                                 <div class="col-sm-6">
@@ -1352,15 +1406,30 @@
         });
 
         gaspoolWithdraw.on('click', () => {
-            withdraw(0, ethers.utils.parseUnits(gaspoolAmount.val()));
+            if (gaspoolAmount.val()) {
+                withdraw(0, ethers.utils.parseUnits(gaspoolAmount.val()));
+            } else if (stats.internal.staked[0]) {
+                const stats = getStats();
+                withdraw(0, stats.internal.staked[0]);
+            }
         });
 
         usdcpoolWithdraw.on('click', () => {
-            withdraw(1, ethers.utils.parseUnits(usdcpoolAmount.val(), tokens[network].stableDecimals));
+            if (usdcpoolAmount.val()) {
+                withdraw(1, ethers.utils.parseUnits(usdcpoolAmount.val(), tokens[network].stableDecimals));
+            } else if (stats.internal.staked[1]) {
+                const stats = getStats();
+                withdraw(1, stats.internal.staked[1]);
+            }
         });
 
         usdc2poolWithdraw.on('click', () => {
-            withdraw(2, ethers.utils.parseUnits(usdc2poolAmount.val(), tokens[network].stableDecimals));
+            if (usdc2poolAmount.val()) {
+                withdraw(2, ethers.utils.parseUnits(usdc2poolAmount.val(), tokens[network].stableDecimals));
+            } else if (stats.internal.staked[2]) {
+                const stats = getStats();
+                withdraw(2, stats.internal.staked[2]);
+            }
         });
 
         function updateAllowances() {
@@ -1372,11 +1441,16 @@
                 gaspoolHarvest.attr('disabled', 'disabled');
             }
 
-            if (!gaspoolAmount.val()) {
+            if (!gaspoolAmount.val() && (!stats.internal.staked[0] || !stats.internal.staked[0].gt(0))) {
                 gaspoolStake.attr('disabled', 'disabled');
                 gaspoolWithdraw.attr('disabled', 'disabled');
+            } else if (stats.internal.staked[0] && stats.internal.staked[0].gt(0)) {
+                gaspoolStake.attr('disabled', 'disabled');
+                gaspoolWithdraw.text('Withdraw All');
+                gaspoolWithdraw.removeAttr('disabled');
             } else {
                 gaspoolStake.removeAttr('disabled');
+                gaspoolWithdraw.text('Withdraw');
                 gaspoolWithdraw.removeAttr('disabled');
             }
 
@@ -1399,11 +1473,16 @@
                 usdcpoolHarvest.attr('disabled', 'disabled');
             }
 
-            if (!usdcpoolAmount.val()) {
+            if (!usdcpoolAmount.val() && (!stats.internal.staked[1] || !stats.internal.staked[1].gt(0))) {
                 usdcpoolStake.attr('disabled', 'disabled');
                 usdcpoolWithdraw.attr('disabled', 'disabled');
+            } else if (stats.internal.staked[1] && stats.internal.staked[1].gt(0)) {
+                usdcpoolStake.attr('disabled', 'disabled');
+                usdcpoolWithdraw.text('Withdraw All');
+                usdcpoolWithdraw.removeAttr('disabled');
             } else {
                 usdcpoolStake.removeAttr('disabled');
+                usdcpoolWithdraw.text('Withdraw');
                 usdcpoolWithdraw.removeAttr('disabled');
             }
 
@@ -1426,11 +1505,16 @@
                 usdc2poolHarvest.attr('disabled', 'disabled');
             }
 
-            if (!usdc2poolAmount.val()) {
+            if (!usdc2poolAmount.val() && (!stats.internal.staked[2] || !stats.internal.staked[2].gt(0))) {
                 usdc2poolStake.attr('disabled', 'disabled');
                 usdc2poolWithdraw.attr('disabled', 'disabled');
+            } else if (stats.internal.staked[2] && stats.internal.staked[2].gt(0)) {
+                usdc2poolStake.attr('disabled', 'disabled');
+                usdc2poolWithdraw.text('Withdraw All');
+                usdc2poolWithdraw.removeAttr('disabled');
             } else {
                 usdc2poolStake.removeAttr('disabled');
+                usdc2poolWithdraw.text('Withdraw');
                 usdc2poolWithdraw.removeAttr('disabled');
             }
 
@@ -1530,10 +1614,10 @@
             }
 
             $('#gaspool-staked').text(numeral(stats.staked[0]).format('0,0.000'));
-            $('#usdcpool-staked').text(numeral(stats.staked[1]).format('0,0.000000'));
-            $('#usdc2pool-staked').text(numeral(stats.staked[2]).format('0,0.000000'));
+            $('#usdcpool-staked').text(numeral(stats.staked[1]).format('$0,0.000000'));
+            $('#usdc2pool-staked').text(numeral(stats.staked[2]).format('$0,0.000000'));
 
-            $('#gaspool-rewards').text(numeral(stats.poolRewards[0]).format('0,0.000000'));
+            $('#gaspool-rewards').text(numeral(stats.poolRewards[0]).format('$0,0.000000'));
             $('#usdcpool-rewards').text(numeral(stats.poolRewards[1]).format('0,0.000'));
             $('#usdc2pool-rewards').text(numeral(stats.poolRewards[2]).format('0,0.000'));
 
@@ -1542,6 +1626,92 @@
             let usdc2poolApr = 0;
 
             if (stats.internal.gasReflectValue && stats.internal.gasValue) {
+                $('#tvl').text(numeral(
+                    ethers.utils.formatEther(
+                        ethers.BigNumber.from(0)
+                            .add(
+                                !stats.internal.totalStaked[0] || !stats.internal.totalStaked[0].gt(0)
+                                    ? ethers.BigNumber.from(0)
+                                    : stats.internal.totalStaked[0]
+                                        .mul(stats.internal.gasReflectValue)
+                                        .mul(stats.internal.gasValue)
+                                        .div(decimals)
+                                        .div(decimals)
+                            )
+                            .add(
+                                !stats.internal.totalStaked[1] || !stats.internal.totalStaked[1].gt(0)
+                                    ? ethers.BigNumber.from(0)
+                                    : stats.internal.totalStaked[1]
+                                        .mul(
+                                            ethers.BigNumber.from(10).pow(
+                                                18 - tokens[network].stableDecimals
+                                            )
+                                        )
+                            )
+                            .add(
+                                !stats.internal.totalStaked[2] || !stats.internal.totalStaked[2].gt(0)
+                                    ? ethers.BigNumber.from(0)
+                                    : stats.internal.totalStaked[2]
+                                        .mul(
+                                            ethers.BigNumber.from(10).pow(
+                                                18 - tokens[network].stableDecimals
+                                            )
+                                        )
+                            )
+                    )
+                ).format('$0,0.00'));
+
+                $('#myFuelValue').text(numeral(
+                    ethers.utils.formatEther(
+                        ethers.BigNumber.from(0)
+                            .add(
+                                !stats.internal.staked[0] || !stats.internal.staked[0].gt(0)
+                                    ? ethers.BigNumber.from(0)
+                                    : stats.internal.staked[0]
+                                        .mul(stats.internal.gasReflectValue)
+                                        .mul(stats.internal.gasValue)
+                                        .div(decimals)
+                                        .div(decimals)
+                            )
+                            .add(
+                                !stats.internal.staked[1] || !stats.internal.staked[1].gt(0)
+                                    ? ethers.BigNumber.from(0)
+                                    : stats.internal.staked[1]
+                                        .mul(
+                                            ethers.BigNumber.from(10).pow(
+                                                18 - tokens[network].stableDecimals
+                                            )
+                                        )
+                            )
+                            .add(
+                                !stats.internal.staked[2] || !stats.internal.staked[2].gt(0)
+                                    ? ethers.BigNumber.from(0)
+                                    : stats.internal.staked[2]
+                                        .mul(
+                                            ethers.BigNumber.from(10).pow(
+                                                18 - tokens[network].stableDecimals
+                                            )
+                                        )
+                            )
+                    )
+                ).format('$0,0.00'));
+
+                $('#gaspool-total-staked').text(numeral(
+                    !stats.internal.totalStaked[0] ? 0 : ethers.utils.formatEther(
+                        stats.internal.totalStaked[0]
+                    )
+                ).format('0,0.00'))
+
+                $('#gaspool-staked-usd').text(numeral(
+                    !stats.internal.staked[0] ? 0 : ethers.utils.formatEther(
+                        stats.internal.staked[0]
+                            .mul(stats.internal.gasReflectValue)
+                            .mul(stats.internal.gasValue)
+                            .div(decimals)
+                            .div(decimals)
+                    )
+                ).format('$0,0.00a'))
+
                 if (stats.internal.rewardsPerBlock[0] && stats.internal.totalStaked[0] && stats.internal.totalStaked[0].gt(0)) {
                     gaspoolApr = (
                         stats.internal.rewardsPerBlock[0].mul(tokens[network].blocksPerYear).mul(
@@ -1557,6 +1727,26 @@
                             .div(decimals)
                     ).toNumber() / 10000;
                 }
+
+                $('#usdcpool-total-staked').text(numeral(
+                    !stats.internal.totalStaked[1] ? 0 : ethers.utils.formatEther(
+                        stats.internal.totalStaked[1].mul(
+                            ethers.BigNumber.from(10).pow(
+                                18 - tokens[network].stableDecimals
+                            )
+                        )
+                    )
+                ).format('$0,0.00'))
+
+                $('#usdcpool-rewards-usd').text(numeral(
+                    !stats.internal.poolRewards[1] ? 0 : ethers.utils.formatEther(
+                        stats.internal.poolRewards[1]
+                            .mul(stats.internal.gasReflectValue)
+                            .mul(stats.internal.gasValue)
+                            .div(decimals)
+                            .div(decimals)
+                    )
+                ).format('$0,0.00a'))
 
                 if (stats.internal.rewardsPerBlock[1] && stats.internal.totalStaked[1] && stats.internal.totalStaked[1].gt(0)) {
                     usdcpoolApr = (
@@ -1574,6 +1764,26 @@
                             )
                     ).toNumber() / 10000;
                 }
+
+                $('#usdc2pool-total-staked').text(numeral(
+                    !stats.internal.totalStaked[2] ? 0 : ethers.utils.formatEther(
+                        stats.internal.totalStaked[2].mul(
+                            ethers.BigNumber.from(10).pow(
+                                18 - tokens[network].stableDecimals
+                            )
+                        )
+                    )
+                ).format('$0,0.00'))
+
+                $('#usdc2pool-rewards-usd').text(numeral(
+                    !stats.internal.poolRewards[2] ? 0 : ethers.utils.formatEther(
+                        stats.internal.poolRewards[2]
+                            .mul(stats.internal.gasReflectValue)
+                            .mul(stats.internal.gasValue)
+                            .div(decimals)
+                            .div(decimals)
+                    )
+                ).format('$0,0.00a'))
 
                 if (stats.internal.rewardsPerBlock[2] && stats.internal.totalStaked[2] && stats.internal.totalStaked[2].gt(0)) {
                     usdc2poolApr = (
