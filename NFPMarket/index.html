@@ -420,6 +420,7 @@
         </nav>
         <!-- End Navbar -->
         <div class="row justify-content-center">
+            <h3 class="text-center">Rare/Legendary Release Timer: <span id="countdown1"></span></h3>
             <div class="col-sm-3 justify-content-center">
                 <div class="card">
                     <div class="uk-card-header" style="height: 125px;">
@@ -601,7 +602,7 @@
     </div>
     <script>
         // Set the date we're counting down to
-        var countDownDate = new Date("2021-09-25T22:00:00.000+00:00").getTime();
+        var countDownDate = new Date("2021-10-16T22:00:00.000+00:00").getTime();
 
         // Update the count down every 1 second
         var x = setInterval(function () {
@@ -617,7 +618,7 @@
             var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
+            
             // Output the result in an element with id="demo"
             document.getElementById("countdown1").innerHTML = days + "d " + hours + "h "
                 + minutes + "m " + seconds + "s ";
