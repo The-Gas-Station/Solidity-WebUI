@@ -1,0 +1,24 @@
+{
+    "bsc": [
+        {
+            "address": "0xD9D8209dC88CB96D0a300C2ab2479608A8D1463d"
+        },
+        {
+            "address": "0x0124378207aF3E62D842f66B5af02dF5e4F9719C"
+        },
+        {
+            "address": "0x8a96E5E22e2b057b9c7e7474B95D02bd9B2D0628"
+        }
+    ],
+    "polygon": [
+        {
+            "address": "0x2bc0bf8e98c7bbf08dd682b3ed0da50991aa66bd"
+        },
+        {
+            "address": "0x20024f775ab6bc96077c73fb2e45c8862ac35552"
+        },
+        {
+            "address": "0x543b1da3a789bd9e72142ce7b7b320dbd4ddea0a"
+        }
+    ]
+}
