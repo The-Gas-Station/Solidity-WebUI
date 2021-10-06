@@ -12,13 +12,13 @@
     ],
     "polygon": [
         {
-            "address": "0x2bc0bf8e98c7bbf08dd682b3ed0da50991aa66bd"
+            "address": "0x2bC0Bf8E98C7BBF08dD682B3Ed0dA50991AA66BD"
         },
         {
-            "address": "0x20024f775ab6bc96077c73fb2e45c8862ac35552"
+            "address": "0x20024f775Ab6bc96077c73Fb2E45C8862aC35552"
         },
         {
-            "address": "0x543b1da3a789bd9e72142ce7b7b320dbd4ddea0a"
+            "address": "0x543B1da3a789bd9e72142ce7B7b320DbD4dDEa0a"
         }
     ]
 }
