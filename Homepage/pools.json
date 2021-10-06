@@ -1,23 +1,29 @@
 {
     "bsc": [
         {
+            "name" : "Stable-Up! (bscGAS->USDC)",
             "address": "0xD9D8209dC88CB96D0a300C2ab2479608A8D1463d"
         },
         {
+            "name" : "Fuel-Up! (USDC->bscGAS)",
             "address": "0x0124378207aF3E62D842f66B5af02dF5e4F9719C"
         },
         {
+            "name" : "Fuel-Up! (USDC->bscGAS)",
             "address": "0x8a96E5E22e2b057b9c7e7474B95D02bd9B2D0628"
         }
     ],
     "polygon": [
         {
+            "name" : "Stable-Up! (polyGAS->USDC)",
             "address": "0x2bC0Bf8E98C7BBF08dD682B3Ed0dA50991AA66BD"
         },
         {
+            "name" : "Fuel-Up! (USDC->polyGAS)",
             "address": "0x20024f775Ab6bc96077c73Fb2E45C8862aC35552"
         },
         {
+            "name" : "Fuel-Up! (USDC->polyGAS)",
             "address": "0x543B1da3a789bd9e72142ce7B7b320DbD4dDEa0a"
         }
     ]
