@@ -581,6 +581,7 @@
                 <div class="col-md-3 d-md-none"></div>
             </div>
             <div class="row mt-4 justify-content-center">
+                <h3 class="text-center">Fuel Tanks (Transitioning into Legacy Tanks)</h3>
                 <div class="col-lg-4 col-sm-6 col-xs-12 justify-content-center p-3">
                     <div class="card" card-default>
                         <div class="card-header text-center" style="padding-bottom: 0;">
@@ -811,6 +812,472 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-4 justify-content-center">
+                <h3 class="text-center">Upcoming Fuel Tanks</h3>
+                <div class="col-lg-4 col-sm-6 col-xs-12 justify-content-center p-3">
+                    <div class="card" card-default>
+                        <div class="card-header text-center" style="padding-bottom: 0;">
+                            <h5>Dual Fuel (APE-LP)</h5>
+                            <h6>Stake <span id="gaspool-staked-token">APE-LP</span>, Earn <span
+                                    id="APELP-reward-token1">USDC</span> + <span
+                                    id="APELP-reward-token2">GAS</span></h6>
+                            <p>Total Staked: <span id="APELP-pool-total-staked">0</span></p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                        type="button" id="APELP-pool-harvest">Harvest</button>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-12">
+                                    <p>Staked:</p>
+                                </div>
+                                <div class="col-12">
+                                    <p class="d-flex justify-content-between">
+                                        <span>
+                                            <span id="APELP-pool-staked">0</span>
+                                            <br />
+                                            (<span id="APELP-pool-staked-usd">0</span>)
+                                        </span>
+                                        <img src="./img/ape-home.svg" class="avatar avatar me-3" alt="logo">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-12">
+                                    <p>Rewards:</p>
+                                </div>
+                                <div class="col-12">
+                                    <p class="d-flex justify-content-between">
+                                        <span>
+                                            <span id="APELP-pool-rewards-USDC">0</span>
+                                        </span>
+                                        <img src="./assets/img/usdc.png" class="avatar avatar me-3" alt="logo">
+                                        <span>
+                                            <span id="APELP-pool-rewards-GAS">0</span>
+                                            <br />
+                                            (<span id="APELP-pool-rewards-GAS-usdvalue">0</span>)
+                                        </span>
+                                        <img src="./token.svg" class="avatar avatar me-3" alt="logo">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center text-center">
+                                <div class="col-sm-4">
+                                    <p>Burn Fee:</p>
+                                    <h6 id="APELP-pool-depositfee"></h6>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>APR: <span id="APELP-pool-apr">-</span></p>
+                                    <p><span id="APELP-pool-countdown"></span> <a id="APELP-pool-countdown-url"
+                                            href="https://polygonscan.com/block/countdown/11555000" target="_blank"
+                                            rel="noopener noreferrer"><i class="fas fa-stopwatch"></i></a></p>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center text-center">
+                                <div class="col-lg-9">
+                                    <div class="input-group">
+                                        <input id="APELP-pool-amount" type="number" class="form-control"
+                                            aria-describedby="button-addon1 button-addon2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center p-3">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                        type="button" id="APELP-pool-stake">Stake</button>
+                                </div>
+                                <div class="col-xs-12">
+                                    <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                        type="button" id="APELP-pool-withdraw">Withdraw</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="col-lg-4 col-sm-6 col-xs-12 justify-content-center p-3">
+                        <div class="card" card-default>
+                            <div class="card-header text-center" style="padding-bottom: 0;">
+                                <h5>GAS MAXIMIZER</h5>
+                                <h6>Stake <span id="max-pool-staked-token">GAS</span>, Earn <span
+                                        id="max-pool-reward-token">GAS</span></h6>
+                                <p>Total Staked: <span id="max-pool-total-staked">0</span></p>
+                            </div>
+                            <div class="card-body">
+                                <div class="row justify-content-center">
+                                    <div class="col">
+                                        <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                            type="button" id="max-pool-harvest">Harvest</button>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <p>Staked:</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="d-flex justify-content-between">
+                                            <span>
+                                                <span id="max-pool-staked">0</span>
+                                                <br />
+                                                (<span id="max-pool-staked-usd">0</span>)
+                                            </span>
+                                            <img src="./token.svg" class="avatar avatar me-3" alt="logo">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <p>Rewards:</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="d-flex justify-content-between">
+                                            <span>
+                                                <span id="max-pool-rewards">0</span>
+                                                <br />
+                                                (<span id="max-pool-rewards-usd">0</span>)
+                                            </span>
+                                            <img src="./token.svg" class="avatar avatar me-3" alt="logo">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center text-center">
+                                    <div class="col-sm-4">
+                                        <p>Burn Fee:</p>
+                                        <h6 id="max-pool-depositfee"></h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p>APR: <span id="max-pool-apr">-</span></p>
+                                        <p><span id="max-pool-countdown"></span> <a id="max-pool-countdown-url"
+                                                href="https://polygonscan.com/block/countdown/11555000" target="_blank"
+                                                rel="noopener noreferrer"><i class="fas fa-stopwatch"></i></a></p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center text-center">
+                                    <div class="col-lg-9">
+                                        <div class="input-group">
+                                            <input id="max-pool-amount" type="number" class="form-control"
+                                                aria-describedby="button-addon1 button-addon2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center p-3">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                            type="button" id="max-pool-stake">Stake</button>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                            type="button" id="max-pool-withdraw">Withdraw</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 col-xs-12 justify-content-center p-3">
+                        <div class="card" card-default>
+                            <div class="card-header text-center" style="padding-bottom: 0;">
+                                <h5>Fuel Up</h5>
+                                <h6>Stake <span id="stable-pool-staked-token">USDC</span>, Earn <span
+                                        id="stable-pool-reward-token">GAS</span></h6>
+                                <p>Total Staked: <span id="stable-pool-total-staked">0</span></p>
+                            </div>
+                            <div class="card-body">
+                                <div class="row justify-content-center">
+                                    <div class="col">
+                                        <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                            type="button" id="stable-pool-harvest">Harvest</button>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <p>Staked:</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="d-flex justify-content-between">
+                                            <span>
+                                                <span id="stable-pool-staked">0</span>
+                                            </span>
+                                            <img src="./assets/img/usdc.png" class="avatar avatar me-3" alt="logo">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <p>Rewards:</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="d-flex justify-content-between">
+                                            <span>
+                                                <span id="stable-pool-rewards">0</span>
+                                                <br />
+                                                (<span id="stable-pool-rewards-usd">0</span>)
+                                            </span>
+                                            <img src="./token.svg" class="avatar avatar me-3" alt="logo">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center text-center">
+                                    <div class="col-sm-4">
+                                        <p>Deposit Fee:</p>
+                                        <h6 id="stable-pool-depositfee"></h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p>APR: <span id="stable-pool-apr">-</span></p>
+                                        <p><span id="stable-pool-countdown"></span> <a id="stable-pool-countdown-url"
+                                                href="https://polygonscan.com/block/countdown/11555000" target="_blank"
+                                                rel="noopener noreferrer"><i class="fas fa-stopwatch"></i></a></p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center text-center">
+                                    <div class="col-lg-9">
+                                        <div class="input-group">
+                                            <input id="stable-pool-amount" type="number" class="form-control"
+                                                aria-describedby="button-addon1 button-addon2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center p-3">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                            type="button" id="stable-pool-stake">Stake</button>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                            type="button" id="stable-pool-withdraw">Withdraw</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 col-xs-12 justify-content-center p-3">
+                        <div class="card" card-default>
+                            <div class="card-header text-center" style="padding-bottom: 0;">
+                                <h5>Stable Up</h5>
+                                <h6>Stake <span id="fuel-pool-staked-token">GAS</span>, Earn <span
+                                        id="fuel-pool-reward-token">USDC</span></h6>
+                                <p>Total Staked: <span id="fuel-pool-total-staked">0</span></p>
+                            </div>
+                            <div class="card-body">
+                                <div class="row justify-content-center">
+                                    <div class="col">
+                                        <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                            type="button" id="fuel-pool-harvest">Harvest</button>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <p>Staked:</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="d-flex justify-content-between">
+                                            <span>
+                                                <span id="fuel-pool-staked">0</span>
+                                                <br />
+                                                (<span id="fuel-pool-staked-usd">0</span>)
+                                            </span>
+                                            <img src="./token.svg" class="avatar avatar me-3" alt="logo">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <p>Rewards:</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="d-flex justify-content-between">
+                                            <span>
+                                                <span id="fuel-pool-rewards">0</span>
+                                            </span>
+                                            <img src="./assets/img/usdc.png" class="avatar avatar me-3" alt="logo">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center text-center">
+                                    <div class="col-sm-4">
+                                        <p>Burn/Deposit Fee:</p>
+                                        <h6 id="fuel-pool-depositfee"></h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p>APR: <span id="fuel-pool-apr">-</span></p>
+                                        <p><span id="fuel-pool-countdown"></span> <a id="fuel-pool-countdown-url"
+                                                href="https://polygonscan.com/block/countdown/11555000" target="_blank"
+                                                rel="noopener noreferrer"><i class="fas fa-stopwatch"></i></a></p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center text-center">
+                                    <div class="col-lg-9">
+                                        <div class="input-group">
+                                            <input id="fuel-pool-amount" type="number" class="form-control"
+                                                aria-describedby="button-addon1 button-addon2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center p-3">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                            type="button" id="fuel-pool-stake">Stake</button>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                            type="button" id="fuel-pool-withdraw">Withdraw</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 col-xs-12 justify-content-center p-3">
+                        <div class="card" card-default>
+                            <div class="card-header text-center" style="padding-bottom: 0;">
+                                <h5>ftmGAS Liquidity Mining</h5>
+                                <h6>Stake <span id="ftmGAS1pool-staked-token">GAS</span>, Earn <span
+                                        id="ftmGAS1pool-reward-token">ftmGAS</span></h6>
+                                <p>Total Staked: <span id="ftmGAS1pool-total-staked">0</span></p>
+                            </div>
+                            <div class="card-body">
+                                <div class="row justify-content-center">
+                                    <div class="col">
+                                        <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                            type="button" id="ftmGAS1pool-harvest">Harvest</button>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <p>Staked:</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="d-flex justify-content-between">
+                                            <span>
+                                                <span id="ftmGAS1pool-staked">0</span>
+                                                <br />
+                                                (<span id="ftmGAS1pool-staked-usd">0</span>)
+                                            </span>
+                                            <img src="./token.svg" class="avatar avatar me-3" alt="logo">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <p>Rewards:</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="d-flex justify-content-between">
+                                            <span>
+                                                <span id="ftmGAS1pool-rewards">0</span>
+                                            </span>
+                                            <img src="./token.svg" class="avatar avatar me-3" alt="logo">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center text-center">
+                                    <div class="col-sm-4">
+                                        <p>Deposit Fee:</p>
+                                        <h6 id="ftmGAS1pool-depositfee"></h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p>Presale Mining Ends:</p>
+                                        <p><span id="ftmGAS1pool-countdown"></span> <a id="ftmGAS1pool-countdown-url"
+                                                href="https://polygonscan.com/block/countdown/11555000" target="_blank"
+                                                rel="noopener noreferrer"><i class="fas fa-stopwatch"></i></a></p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center text-center">
+                                    <div class="col-lg-9">
+                                        <div class="input-group">
+                                            <input id="ftmGAS1pool-amount" type="number" class="form-control"
+                                                aria-describedby="button-addon1 button-addon2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center p-3">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                            type="button" id="ftmGAS1pool-stake">Stake</button>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                            type="button" id="ftmGAS1pool-withdraw">Withdraw</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 col-xs-12 justify-content-center p-3">
+                        <div class="card" card-default>
+                            <div class="card-header text-center" style="padding-bottom: 0;">
+                                <h5>ftmGAS Liquidity Mining</h5>
+                                <h6>Stake <span id="ftmGAS2pool-staked-token">USDC</span>, Earn <span
+                                        id="ftmGAS2pool-reward-token">ftmGAS</span></h6>
+                                <p>Total Staked: <span id="ftmGAS2pool-total-staked">0</span></p>
+                            </div>
+                            <div class="card-body">
+                                <div class="row justify-content-center">
+                                    <div class="col">
+                                        <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                            type="button" id="ftmGAS2pool-harvest">Harvest</button>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <p>Staked:</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="d-flex justify-content-between">
+                                            <span>
+                                                <span id="ftmGAS2pool-staked">0</span>
+                                            </span>
+                                            <img src="./assets/img/usdc.png" class="avatar avatar me-3" alt="logo">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <p>Rewards:</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="d-flex justify-content-between">
+                                            <span>
+                                                <span id="ftmGAS2pool-rewards">0</span>
+                                            </span>
+                                            <img src="./token.svg" class="avatar avatar me-3" alt="logo">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center text-center">
+                                    <div class="col-sm-4">
+                                        <p>Deposit Fee:</p>
+                                        <h6 id="ftmGAS2pool-depositfee"></h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p>Presale Mining Ends:</p>
+                                        <p><span id="ftmGAS2pool-countdown"></span> <a id="ftmGAS2pool-countdown-url"
+                                                href="https://polygonscan.com/block/countdown/11555000" target="_blank"
+                                                rel="noopener noreferrer"><i class="fas fa-stopwatch"></i></a></p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center text-center">
+                                    <div class="col-lg-9">
+                                        <div class="input-group">
+                                            <input id="ftmGAS2pool-amount" type="number" class="form-control"
+                                                aria-describedby="button-addon1 button-addon2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center p-3">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                            type="button" id="ftmGAS2pool-stake">Stake</button>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-block btn-sm btn-outline-secondary" style="width: 100%"
+                                            type="button" id="ftmGAS2pool-withdraw">Withdraw</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <div class="row my-4">
                 <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
                     <div class="card">
