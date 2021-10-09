@@ -7,7 +7,8 @@ const tokens = {
     rpcUrls: ["https://bsc-dataseed2.binance.org"],
     blockCreated: 9791290,
     provider: null,
-    lpAddress: "0x340db2a8E77aD047e5E786c94dB0aE1593082264",
+    lpAddress: "0xfB6f376B990ae3fc3Cfa2Ce1cB1A796c5895AcBa",
+    extraLpAddresses: ["0x340db2a8E77aD047e5E786c94dB0aE1593082264"],
     gasAddress: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
     gasLpAddress: "0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16",
     stableDecimals: 18,
@@ -25,6 +26,7 @@ const tokens = {
     blockCreated: 17732765,
     provider: null,
     lpAddress: "0x2637ce16e98fcc66f2ccdd36087defdcf955b68a",
+    extraLpAddresses: [],
     gasAddress: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
     gasLpAddress: "0xcd353F79d9FADe311fC3119B841e1f456b54e858",
     stableDecimals: 6,
@@ -803,6 +805,7 @@ const refreshData = {
     timeout: null,
     refreshing: false,
   },
+  extraLpData: [],
   totalRewardsData: {
     timeout: null,
     refreshing: false,
@@ -860,6 +863,7 @@ let stats = {
   marketCap: "0",
   tradingVolume: "0",
   lpValue: "0",
+  extraLpValue: [],
   holders: "0",
   gasPrice: "5",
   block: 0,
@@ -874,7 +878,9 @@ let stats = {
     7: JSON.parse(JSON.stringify(defaultPoolDataStats)),
     8: JSON.parse(JSON.stringify(defaultPoolDataStats)),
   },
-  internal: {},
+  internal: {
+    extraLpData: [],
+  },
 };
 
 function setAddress(addr) {
@@ -930,6 +936,7 @@ async function configure(statsUpdatedCallback) {
         marketCap: "0",
         tradingVolume: "0",
         lpValue: "0",
+        extraLpValue: [],
         holders: "0",
         gasPrice: "5",
         block: 0,
@@ -944,7 +951,9 @@ async function configure(statsUpdatedCallback) {
           7: JSON.parse(JSON.stringify(defaultPoolDataStats)),
           8: JSON.parse(JSON.stringify(defaultPoolDataStats)),
         },
-        internal: {},
+        internal: {
+          extraLpData: [],
+        },
       };
     }
 
@@ -1046,6 +1055,26 @@ function updateLpValue() {
         .div(decimals)
         .div(decimals)
     );
+  }
+
+  let i = 0;
+
+  while (i < stats.internal.extraLpData.length) {
+    if (stats.extraLpValue.length <= i) {
+      stats.extraLpValue.push("0");
+    }
+
+    if (stats.internal.gasValue && stats.internal.extraLpData[i].percentA) {
+      stats.extraLpValue[i] = ethers.utils.formatEther(
+        stats.internal.extraLpData[i].lpSupply
+          .mul(stats.internal.extraLpData[i].percentA)
+          .mul(stats.internal.gasValue)
+          .div(decimals)
+          .div(decimals)
+      );
+    }
+
+    i++;
   }
 }
 
@@ -1164,6 +1193,55 @@ async function refreshLpData() {
     halfInterval + Math.random() * halfInterval
   );
   refreshData.lpData.refreshing = false;
+
+  if (statsUpdated) {
+    statsUpdated();
+  }
+}
+
+async function refreshExtraLpData(index) {
+  while (refreshData.extraLpData.length <= index) {
+    refreshData.extraLpData.push({
+      timeout: null,
+      refreshing: false,
+    });
+    stats.internal.extraLpData.push({});
+  }
+
+  if (refreshData.extraLpData[index].refreshing) {
+    return;
+  }
+
+  refreshData.extraLpData[index].refreshing = true;
+  clearTimeout(refreshData.extraLpData[index].timeout);
+
+  if (tokens[network].extraLpAddresses[index]) {
+    try {
+      let [gasReflectValue, percentA, percentB, lpSupply] =
+        await getTokenValueFromLP(
+          tokens[network].address,
+          tokens[network].extraLpAddresses[index],
+          tokens[network].provider
+        );
+
+      stats.internal.extraLpData[index].gasReflectValue = gasReflectValue;
+      stats.internal.extraLpData[index].percentA = percentA;
+      stats.internal.extraLpData[index].percentB = percentB;
+      stats.internal.extraLpData[index].lpSupply = lpSupply;
+    } catch (e) {
+      console.error(e);
+    }
+
+    updateMarketCap();
+    updateLpValue();
+  }
+
+  const halfInterval = refreshInterval / 2;
+  refreshData.extraLpData[index].timeout = setTimeout(
+    () => refreshExtraLpData(index),
+    halfInterval + Math.random() * halfInterval
+  );
+  refreshData.extraLpData[index].refreshing = false;
 
   if (statsUpdated) {
     statsUpdated();
@@ -1639,6 +1717,10 @@ async function loadStats() {
     refreshGasValue();
     refreshLpData();
 
+    tokens[network].extraLpAddresses.forEach((_address, index) =>
+      refreshExtraLpData(index)
+    );
+
     const gasReflectContract = new ethers.Contract(
       tokens[network].address,
       gasReflectAbi,
@@ -1753,6 +1835,7 @@ async function switchNetwork(_network, callback) {
     marketCap: "0",
     tradingVolume: "0",
     lpValue: "0",
+    extraLpValue: [],
     holders: "0",
     gasPrice: "5",
     block: 0,
@@ -1767,7 +1850,9 @@ async function switchNetwork(_network, callback) {
       7: JSON.parse(JSON.stringify(defaultPoolDataStats)),
       8: JSON.parse(JSON.stringify(defaultPoolDataStats)),
     },
-    internal: {},
+    internal: {
+      extraLpData: [],
+    },
   };
 
   if (statsUpdated) {
