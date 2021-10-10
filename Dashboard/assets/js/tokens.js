@@ -79,6 +79,15 @@ const pools = {
       startBlock: 11620000,
       endBlock: 13550000,
     },
+    {
+      address: "0xE9916A99787b9f8a86116d86f900e18aF0a2aA51",
+      staked: "0x6fabfe7946b23da23ad51dc45167cc2cfd0ce70e",
+      reward: "0x6fabfe7946b23da23ad51dc45167cc2cfd0ce70e",
+      depositFee: 0,
+      depositBurnFee: 3,
+      startBlock: 11650000,
+      endBlock: 13550000,
+    },
   ],
   137: [
     {
@@ -119,6 +128,15 @@ const pools = {
       depositFee: 0,
       depositBurnFee: 1,
       startBlock: 20000000,
+      endBlock: 22300000,
+    },
+    {
+      address: "0xBE9bEAc00d0a495Cb3482Fb22a9dc874305262E2",
+      staked: "0x840B5FC8C6deE2b1140174a3ABdC215190426CCf",
+      reward: "0x840B5FC8C6deE2b1140174a3ABdC215190426CCf",
+      depositFee: 0,
+      depositBurnFee: 3,
+      startBlock: 20059000,
       endBlock: 22300000,
     },
   ],
@@ -1916,6 +1934,22 @@ async function approve(poolId) {
       );
     } catch (e) {
       console.error(e);
+    }
+  }
+}
+
+async function compound(poolId) {
+  if (connected && tokens[network]) {
+    try {
+      const poolContract = new ethers.Contract(
+        pools[network][poolId].address,
+        poolAbi,
+        new ethers.providers.Web3Provider(provider).getSigner()
+      );
+
+      await poolContract.compound();
+    } catch (error) {
+      console.log(error);
     }
   }
 }
