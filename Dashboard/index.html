@@ -745,10 +745,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row mt-4 justify-content-center">
-                <h3 class="text-center">Upcoming Fuel Tanks</h3>
-
                 <div class="col-lg-4 col-sm-6 col-xs-12 justify-content-center p-3">
                     <div class="card" card-default>
                         <div class="card-header text-center" style="padding-bottom: 0;">
@@ -830,7 +826,8 @@
                         <div class="card-header text-center" style="padding-bottom: 0;">
                             <h5>Stable Up</h5>
                             <h6>Stake <span id="fuel-pool-staked-token">GAS</span>, Earn <span
-                                    id="fuel-pool-reward-token">USDC</span></h6>
+                                    id="fuel-pool-reward-token">USDC</span>
+                            </h6>
                             <p>Total Staked: <span id="fuel-pool-total-staked">0</span></p>
                         </div>
                         <div class="card-body">
@@ -901,6 +898,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row mt-4 justify-content-center">
+                <h3 class="text-center">Upcoming Fuel Tanks</h3>
+
                 <div class="col-lg-4 col-sm-6 col-xs-12 justify-content-center p-3">
                     <div class="card" card-default>
                         <div class="card-header text-center" style="padding-bottom: 0;">
@@ -1745,6 +1746,8 @@
         const usdc2poolAmount = $('#usdc2pool-amount');
         const apelppoolAmount = $('#APELP-pool-amount');
         const maxpoolAmount = $('#max-pool-amount');
+        const stableuppoolAmount = $('#stable-pool-amount');
+        const fueluppoolAmount = $('#fuel-pool-amount');
 
 
         const gaspoolStake = $('#gaspool-stake');
@@ -1768,12 +1771,22 @@
         const maxpoolHarvest = $('#max-pool-harvest');
         const maxpoolCompound = $('#max-pool-compound');
 
+        const stableuppoolStake = $('#stable-pool-stake');
+        const stableuppoolWithdraw = $('#stable-pool-withdraw');
+        const stableuppoolHarvest = $('#stable-pool-harvest');
+
+        const fueluppoolStake = $('#fuel-pool-stake');
+        const fueluppoolWithdraw = $('#fuel-pool-withdraw');
+        const fueluppoolHarvest = $('#fuel-pool-harvest');
+
 
         let gaspoolApproved = false;
         let usdcpoolApproved = false;
         let usdc2poolApproved = false;
         let apelppoolApproved = false;
         let maxpoolApproved = false;
+        let stableuppoolApproved = false;
+        let fueluppoolApproved = false;
 
         addTokenBtn.prop("disabled", true);
         connectBtn.prop("disabled", true);
@@ -1833,6 +1846,22 @@
             }
         });
 
+        stableuppoolHarvest.on('click', () => {
+            updateAllowances();
+
+            if (stats.poolData[5].rewards[0]) {
+                deposit(5, 0);
+            }
+        });
+
+        fueluppoolHarvest.on('click', () => {
+            updateAllowances();
+
+            if (stats.poolData[6].rewards[0]) {
+                deposit(6, 0);
+            }
+        });
+
         gaspoolStake.on('click', () => {
             updateAllowances();
 
@@ -1882,9 +1911,29 @@
             updateAllowances();
 
             if (maxpoolApproved) {
-                deposit(4, ethers.utils.parseUnits(maxpoolAmount.val()));
+                deposit(4, ethers.utils.parseUnits(maxpoolAmount.val(), stats.poolData[4].internal.stakeDecimals));
             } else {
                 approve(4);
+            }
+        });
+
+        stableuppoolStake.on('click', () => {
+            updateAllowances();
+
+            if (stableuppoolApproved) {
+                deposit(5, ethers.utils.parseUnits(stableuppoolAmount.val(), stats.poolData[5].internal.stakeDecimals));
+            } else {
+                approve(5);
+            }
+        });
+
+        fueluppoolStake.on('click', () => {
+            updateAllowances();
+
+            if (fueluppoolApproved) {
+                deposit(6, ethers.utils.parseUnits(fueluppoolAmount.val(), stats.poolData[6].internal.stakeDecimals));
+            } else {
+                approve(6);
             }
         });
 
@@ -1933,6 +1982,24 @@
             }
         });
 
+        stableuppoolWithdraw.on('click', () => {
+            if (stableuppoolAmount.val()) {
+                withdraw(5, ethers.utils.parseUnits(stableuppoolAmount.val(), stats.poolData[5].internal.stakeDecimals));
+            } else if (stats.poolData[5].internal.staked) {
+                const stats = getStats();
+                withdraw(5, stats.poolData[5].internal.staked);
+            }
+        });
+
+        fueluppoolWithdraw.on('click', () => {
+            if (fueluppoolAmount.val()) {
+                withdraw(6, ethers.utils.parseUnits(fueluppoolAmount.val(), stats.poolData[6].internal.stakeDecimals));
+            } else if (stats.poolData[6].internal.staked) {
+                const stats = getStats();
+                withdraw(6, stats.poolData[6].internal.staked);
+            }
+        });
+
         function updateAllowances() {
             const stats = getStats();
 
@@ -1959,6 +2026,10 @@
                 gaspoolApproved = false;
                 gaspoolStake.text('APPROVE');
                 gaspoolStake.removeAttr('disabled');
+            } else if (gaspoolAmount.val() && stats.poolData[0].stakeAmount < parseInt(gaspoolAmount.val())) {
+                gaspoolApproved = false;
+                gaspoolStake.text('NOT ENOUGH');
+                gaspoolStake.attr('disabled', 'disabled');
             } else if (gaspoolAmount.val() && stats.poolData[0].stakeAllowance < parseInt(gaspoolAmount.val())) {
                 gaspoolApproved = false;
                 gaspoolStake.text('APPROVE');
@@ -1991,6 +2062,10 @@
                 usdcpoolApproved = false;
                 usdcpoolStake.text('APPROVE');
                 usdcpoolStake.removeAttr('disabled');
+            } else if (usdcpoolAmount.val() && stats.poolData[1].stakeAmount < parseInt(usdcpoolAmount.val())) {
+                usdcpoolApproved = false;
+                usdcpoolStake.text('NOT ENOUGH');
+                usdcpoolStake.attr('disabled', 'disabled');
             } else if (usdcpoolAmount.val() && stats.poolData[1].stakeAllowance < parseInt(usdcpoolAmount.val())) {
                 usdcpoolApproved = false;
                 usdcpoolStake.text('APPROVE');
@@ -2023,6 +2098,10 @@
                 usdc2poolApproved = false;
                 usdc2poolStake.text('APPROVE');
                 usdc2poolStake.removeAttr('disabled');
+            } else if (usdc2poolAmount.val() && stats.poolData[2].stakeAmount < parseInt(usdc2poolAmount.val())) {
+                usdc2poolApproved = false;
+                usdc2poolStake.text('NOT ENOUGH');
+                usdc2poolStake.attr('disabled', 'disabled');
             } else if (usdc2poolAmount.val() && stats.poolData[2].stakeAllowance < parseInt(usdc2poolAmount.val())) {
                 usdc2poolApproved = false;
                 usdc2poolStake.text('APPROVE');
@@ -2056,6 +2135,10 @@
                 apelppoolApproved = false;
                 apelppoolStake.text('APPROVE');
                 apelppoolStake.removeAttr('disabled');
+            } else if (apelppoolAmount.val() && stats.poolData[3].stakeAmount < parseInt(apelppoolAmount.val())) {
+                apelppoolApproved = false;
+                apelppoolStake.text('NOT ENOUGH');
+                apelppoolStake.attr('disabled', 'disabled');
             } else if (apelppoolAmount.val() && stats.poolData[3].stakeAllowance < parseInt(apelppoolAmount.val())) {
                 apelppoolApproved = false;
                 apelppoolStake.text('APPROVE');
@@ -2096,6 +2179,10 @@
                 maxpoolApproved = false;
                 maxpoolStake.text('APPROVE');
                 maxpoolStake.removeAttr('disabled');
+            } else if (maxpoolAmount.val() && stats.poolData[4].stakeAmount < parseInt(maxpoolAmount.val())) {
+                maxpoolApproved = false;
+                maxpoolStake.text('NOT ENOUGH');
+                maxpoolStake.attr('disabled', 'disabled');
             } else if (maxpoolAmount.val() && stats.poolData[4].stakeAllowance < parseInt(maxpoolAmount.val())) {
                 maxpoolApproved = false;
                 maxpoolStake.text('APPROVE');
@@ -2104,6 +2191,78 @@
                 maxpoolApproved = true;
                 maxpoolStake.text('STAKE');
             }
+
+            if (stats.poolData[5].rewards[0]) {
+                stableuppoolHarvest.removeAttr('disabled');
+            } else {
+                stableuppoolHarvest.attr('disabled', 'disabled');
+            }
+
+            if (!stableuppoolAmount.val() && (!stats.poolData[5].internal.staked || !stats.poolData[5].internal.staked.gt(0))) {
+                stableuppoolStake.attr('disabled', 'disabled');
+                stableuppoolWithdraw.attr('disabled', 'disabled');
+            } else if (!stableuppoolAmount.val() && stats.poolData[5].internal.staked && stats.poolData[5].internal.staked.gt(0)) {
+                stableuppoolStake.attr('disabled', 'disabled');
+                stableuppoolWithdraw.text('Withdraw All');
+                stableuppoolWithdraw.removeAttr('disabled');
+            } else {
+                stableuppoolStake.removeAttr('disabled');
+                stableuppoolWithdraw.text('Withdraw');
+                stableuppoolWithdraw.removeAttr('disabled');
+            }
+
+            if (stats.poolData[5].stakeAllowance < 0.1) {
+                stableuppoolApproved = false;
+                stableuppoolStake.text('APPROVE');
+                stableuppoolStake.removeAttr('disabled');
+            } else if (stableuppoolAmount.val() && stats.poolData[5].stakeAmount < parseInt(stableuppoolAmount.val())) {
+                stableuppoolApproved = false;
+                stableuppoolStake.text('NOT ENOUGH');
+                stableuppoolStake.attr('disabled', 'disabled');
+            } else if (stableuppoolAmount.val() && stats.poolData[5].stakeAllowance < parseInt(stableuppoolAmount.val())) {
+                stableuppoolApproved = false;
+                stableuppoolStake.text('APPROVE');
+                stableuppoolStake.removeAttr('disabled');
+            } else {
+                stableuppoolApproved = true;
+                stableuppoolStake.text('STAKE');
+            }
+
+            if (stats.poolData[6].rewards[0]) {
+                fueluppoolHarvest.removeAttr('disabled');
+            } else {
+                fueluppoolHarvest.attr('disabled', 'disabled');
+            }
+
+            if (!fueluppoolAmount.val() && (!stats.poolData[6].internal.staked || !stats.poolData[6].internal.staked.gt(0))) {
+                fueluppoolStake.attr('disabled', 'disabled');
+                fueluppoolWithdraw.attr('disabled', 'disabled');
+            } else if (!fueluppoolAmount.val() && stats.poolData[6].internal.staked && stats.poolData[6].internal.staked.gt(0)) {
+                fueluppoolStake.attr('disabled', 'disabled');
+                fueluppoolWithdraw.text('Withdraw All');
+                fueluppoolWithdraw.removeAttr('disabled');
+            } else {
+                fueluppoolStake.removeAttr('disabled');
+                fueluppoolWithdraw.text('Withdraw');
+                fueluppoolWithdraw.removeAttr('disabled');
+            }
+
+            if (stats.poolData[6].stakeAllowance < 0.1) {
+                fueluppoolApproved = false;
+                fueluppoolStake.text('APPROVE');
+                fueluppoolStake.removeAttr('disabled');
+            } else if (fueluppoolAmount.val() && stats.poolData[6].stakeAmount < parseInt(fueluppoolAmount.val())) {
+                fueluppoolApproved = false;
+                fueluppoolStake.text('NOT ENOUGH');
+                fueluppoolStake.attr('disabled', 'disabled');
+            } else if (fueluppoolAmount.val() && stats.poolData[6].stakeAllowance < parseInt(fueluppoolAmount.val())) {
+                fueluppoolApproved = false;
+                fueluppoolStake.text('APPROVE');
+                fueluppoolStake.removeAttr('disabled');
+            } else {
+                fueluppoolApproved = true;
+                fueluppoolStake.text('STAKE');
+            }
         }
 
         gaspoolAmount.on('change', updateAllowances);
@@ -2111,6 +2270,8 @@
         usdc2poolAmount.on('change', updateAllowances);
         apelppoolAmount.on('change', updateAllowances);
         maxpoolAmount.on('change', updateAllowances);
+        stableuppoolAmount.on('change', updateAllowances);
+        fueluppoolAmount.on('change', updateAllowances);
 
         // Setups up connection/provider
         configure(() => {
@@ -2145,24 +2306,32 @@
             $('#APELP-pool-reward-token2').text(network == '56' ? "bscGAS" : "polyGAS");
             $('#max-pool-staked-token').text(network == '56' ? "bscGAS" : "polyGAS");
             $('#max-pool-reward-token').text(network == '56' ? "bscGAS" : "polyGAS");
+            $('#stable-pool-reward-token').text(network == '56' ? "bscGAS" : "polyGAS");
+            $('#fuel-pool-staked-token').text(network == '56' ? "bscGAS" : "polyGAS");
 
             $('#gaspool-depositfee').text(`${pools[network][0].depositFee + pools[network][0].depositBurnFee}%`);
             $('#usdcpool-depositfee').text(`${pools[network][1].depositFee + pools[network][1].depositBurnFee}%`);
             $('#usdc2pool-depositfee').text(`${pools[network][2].depositFee + pools[network][2].depositBurnFee}%`);
             $('#APELP-pool-depositfee').text(`${pools[network][3].depositFee + pools[network][3].depositBurnFee}%`);
             $('#max-pool-depositfee').text(`${pools[network][4].depositFee + pools[network][4].depositBurnFee}%`);
+            $('#stable-pool-depositfee').text(`${pools[network][5].depositFee + pools[network][5].depositBurnFee}%`);
+            $('#fuel-pool-depositfee').text(`${pools[network][6].depositFee + pools[network][6].depositBurnFee}%`);
 
             const gaspoolCountdown = $('#gaspool-countdown');
             const usdcpoolCountdown = $('#usdcpool-countdown');
             const usdc2poolCountdown = $('#usdc2pool-countdown');
             const apelppoolCountdown = $('#APELP-pool-countdown');
             const maxpoolCountdown = $('#max-pool-countdown');
+            const stableuppoolCountdown = $('#stable-pool-countdown');
+            const fueluppoolCountdown = $('#fuel-pool-countdown');
 
             const gaspoolCountdownUrl = $('#gaspool-countdown-url');
             const usdcpoolCountdownUrl = $('#usdcpool-countdown-url');
             const usdc2poolCountdownUrl = $('#usdc2pool-countdown-url');
             const apelppoolCountdownUrl = $('#APELP-pool-countdown-url');
             const maxpoolCountdownUrl = $('#max-pool-countdown-url');
+            const stableuppoolCountdownUrl = $('#stable-pool-countdown-url');
+            const fueluppoolCountdownUrl = $('#fuel-pool-countdown-url');
 
             if (stats.block) {
                 gaspoolCountdown.parent().show();
@@ -2170,6 +2339,8 @@
                 usdc2poolCountdown.parent().show();
                 apelppoolCountdown.parent().show();
                 maxpoolCountdown.parent().show();
+                stableuppoolCountdown.parent().show();
+                fueluppoolCountdown.parent().show();
 
                 if (pools[network][0].startBlock > stats.block) {
                     gaspoolCountdown.text(`Starts in ${pools[network][0].startBlock - stats.block}`);
@@ -2220,12 +2391,34 @@
                 } else {
                     maxpoolCountdown.parent().html('Finished!')
                 }
+
+                if (pools[network][5].startBlock > stats.block) {
+                    stableuppoolCountdown.text(`Starts in ${pools[network][5].startBlock - stats.block}`);
+                    stableuppoolCountdownUrl.attr('href', `${tokens[network].countdownUrl}${pools[network][5].startBlock}`);
+                } else if (pools[network][5].endBlock > stats.block) {
+                    stableuppoolCountdown.text(`Ends in ${pools[network][5].endBlock - stats.block}`);
+                    stableuppoolCountdownUrl.attr('href', `${tokens[network].countdownUrl}${pools[network][5].endBlock}`);
+                } else {
+                    stableuppoolCountdown.parent().html('Finished!')
+                }
+
+                if (pools[network][6].startBlock > stats.block) {
+                    fueluppoolCountdown.text(`Starts in ${pools[network][6].startBlock - stats.block}`);
+                    fueluppoolCountdownUrl.attr('href', `${tokens[network].countdownUrl}${pools[network][6].startBlock}`);
+                } else if (pools[network][6].endBlock > stats.block) {
+                    fueluppoolCountdown.text(`Ends in ${pools[network][6].endBlock - stats.block}`);
+                    fueluppoolCountdownUrl.attr('href', `${tokens[network].countdownUrl}${pools[network][6].endBlock}`);
+                } else {
+                    fueluppoolCountdown.parent().html('Finished!')
+                }
             } else {
                 gaspoolCountdown.parent().hide();
                 usdcpoolCountdown.parent().hide();
                 usdc2poolCountdown.parent().hide();
                 apelppoolCountdown.parent().hide();
                 maxpoolCountdown.parent().hide();
+                stableuppoolCountdown.parent().hide();
+                fueluppoolCountdown.parent().hide();
             }
 
             $('#gaspool-staked').text(numeral(stats.poolData[0].staked).format('0,0.000'));
@@ -2233,6 +2426,8 @@
             $('#usdc2pool-staked').text(numeral(stats.poolData[2].staked).format('$0,0.000000'));
             $('#APELP-pool-staked').text(numeral(stats.poolData[3].staked).format('0,0.000'));
             $('#max-pool-staked').text(numeral(stats.poolData[4].staked).format('0,0.000'));
+            $('#stable-pool-staked').text(numeral(stats.poolData[5].staked).format('$0,0.000000'));
+            $('#fuel-pool-staked').text(numeral(stats.poolData[6].staked).format('0,0.000'));
 
             $('#gaspool-rewards').text(numeral(stats.poolData[0].rewards[0]).format('$0,0.000'));
             $('#usdcpool-rewards').text(numeral(stats.poolData[1].rewards[0]).format('0,0.000'));
@@ -2240,12 +2435,16 @@
             $('#APELP-pool-rewards-USDC').text(numeral(stats.poolData[3].rewards[0]).format('$0,0.000'));
             $('#APELP-pool-rewards-GAS').text(numeral(stats.poolData[3].rewards[1]).format('0,0.000 a'));
             $('#max-pool-rewards').text(numeral(stats.poolData[4].rewards[0]).format('0,0.000'));
+            $('#stable-pool-rewards').text(numeral(stats.poolData[5].rewards[0]).format('0,0.000'));
+            $('#fuel-pool-rewards').text(numeral(stats.poolData[6].rewards[0]).format('$0,0.000'));
 
             let gaspoolApr = 0;
             let usdcpoolApr = 0;
             let usdc2poolApr = 0;
             let apelppoolApr = 0;
             let maxpoolApr = 0;
+            let stableuppoolApr = 0;
+            let fueluppoolApr = 0;
 
             if (stats.internal.gasReflectValue && stats.internal.gasValue) {
                 $('#tvl').text(numeral(
@@ -2294,6 +2493,25 @@
                                 !stats.poolData[4].internal.totalStaked || !stats.poolData[4].internal.totalStaked.gt(0)
                                     ? ethers.BigNumber.from(0)
                                     : stats.poolData[4].internal.totalStaked
+                                        .mul(stats.internal.gasReflectValue)
+                                        .mul(stats.internal.gasValue)
+                                        .div(decimals)
+                                        .div(decimals)
+                            )
+                            .add(
+                                !stats.poolData[5].internal.totalStaked || !stats.poolData[5].internal.totalStaked.gt(0)
+                                    ? ethers.BigNumber.from(0)
+                                    : stats.poolData[5].internal.totalStaked
+                                        .mul(
+                                            ethers.BigNumber.from(10).pow(
+                                                18 - tokens[network].stableDecimals
+                                            )
+                                        )
+                            )
+                            .add(
+                                !stats.poolData[6].internal.totalStaked || !stats.poolData[6].internal.totalStaked.gt(0)
+                                    ? ethers.BigNumber.from(0)
+                                    : stats.poolData[6].internal.totalStaked
                                         .mul(stats.internal.gasReflectValue)
                                         .mul(stats.internal.gasValue)
                                         .div(decimals)
@@ -2348,6 +2566,25 @@
                                 !stats.poolData[4].internal.staked || !stats.poolData[4].internal.staked.gt(0)
                                     ? ethers.BigNumber.from(0)
                                     : stats.poolData[4].internal.staked
+                                        .mul(stats.internal.gasReflectValue)
+                                        .mul(stats.internal.gasValue)
+                                        .div(decimals)
+                                        .div(decimals)
+                            )
+                            .add(
+                                !stats.poolData[5].internal.staked || !stats.poolData[5].internal.staked.gt(0)
+                                    ? ethers.BigNumber.from(0)
+                                    : stats.poolData[5].internal.staked
+                                        .mul(
+                                            ethers.BigNumber.from(10).pow(
+                                                18 - tokens[network].stableDecimals
+                                            )
+                                        )
+                            )
+                            .add(
+                                !stats.poolData[6].internal.staked || !stats.poolData[6].internal.staked.gt(0)
+                                    ? ethers.BigNumber.from(0)
+                                    : stats.poolData[6].internal.staked
                                         .mul(stats.internal.gasReflectValue)
                                         .mul(stats.internal.gasValue)
                                         .div(decimals)
@@ -2566,6 +2803,75 @@
                             .div(decimals)
                     ).toNumber() / 10000;
                 }
+
+                $('#stable-pool-total-staked').text(numeral(
+                    !stats.poolData[5].internal.totalStaked ? 0 : ethers.utils.formatEther(
+                        stats.poolData[5].internal.totalStaked.mul(
+                            ethers.BigNumber.from(10).pow(
+                                18 - tokens[network].stableDecimals
+                            )
+                        )
+                    )
+                ).format('$0,0.00'))
+
+                $('#stable-pool-rewards-usd').text(numeral(
+                    !stats.poolData[5].internal.rewards[0] ? 0 : ethers.utils.formatEther(
+                        stats.poolData[5].internal.rewards[0]
+                            .mul(stats.internal.gasReflectValue)
+                            .mul(stats.internal.gasValue)
+                            .div(decimals)
+                            .div(decimals)
+                    )
+                ).format('$0,0.00a'))
+
+                if (stats.poolData[5].internal.rewardsPerBlock[0] && stats.poolData[5].internal.totalStaked && stats.poolData[5].internal.totalStaked.gt(0)) {
+                    stableuppoolApr = (
+                        stats.poolData[5].internal.rewardsPerBlock[0].mul(tokens[network].blocksPerYear)
+                            .mul(stats.internal.gasReflectValue)
+                            .mul(stats.internal.gasValue)
+                            .div(decimals)
+                            .div(decimals)
+                    ).mul(10000).div(
+                        stats.poolData[5].internal.totalStaked
+                            .mul(
+                                ethers.BigNumber.from(10).pow(
+                                    18 - tokens[network].stableDecimals
+                                )
+                            )
+                    ).toNumber() / 10000;
+                }
+
+                $('#fuel-pool-total-staked').text(numeral(
+                    !stats.poolData[6].internal.totalStaked ? 0 : ethers.utils.formatEther(
+                        stats.poolData[6].internal.totalStaked
+                    )
+                ).format('0,0.00'))
+
+                $('#fuel-pool-staked-usd').text(numeral(
+                    !stats.poolData[6].internal.staked ? 0 : ethers.utils.formatEther(
+                        stats.poolData[6].internal.staked
+                            .mul(stats.internal.gasReflectValue)
+                            .mul(stats.internal.gasValue)
+                            .div(decimals)
+                            .div(decimals)
+                    )
+                ).format('$0,0.00a'))
+
+                if (stats.poolData[6].internal.rewardsPerBlock[0] && stats.poolData[6].internal.totalStaked && stats.poolData[6].internal.totalStaked.gt(0)) {
+                    fueluppoolApr = (
+                        stats.poolData[6].internal.rewardsPerBlock[0].mul(tokens[network].blocksPerYear).mul(
+                            ethers.BigNumber.from(10).pow(
+                                18 - tokens[network].stableDecimals
+                            )
+                        )
+                    ).mul(10000).div(
+                        stats.poolData[6].internal.totalStaked
+                            .mul(stats.internal.gasReflectValue)
+                            .mul(stats.internal.gasValue)
+                            .div(decimals)
+                            .div(decimals)
+                    ).toNumber() / 10000;
+                }
             }
 
             $('#gaspool-apr').text(gaspoolApr > 0 ? numeral(gaspoolApr).format('0.00%') : '-');
@@ -2573,6 +2879,8 @@
             $('#usdc2pool-apr').text(usdc2poolApr > 0 ? numeral(usdc2poolApr).format('0.00%') : '-');
             $('#APELP-pool-apr').text(apelppoolApr > 0 ? numeral(apelppoolApr).format('0.00%') : '-');
             $('#max-pool-apr').text(maxpoolApr > 0 ? numeral(maxpoolApr).format('0.00%') : '-');
+            $('#stable-pool-apr').text(maxpoolApr > 0 ? numeral(stableuppoolApr).format('0.00%') : '-');
+            $('#fuel-pool-apr').text(maxpoolApr > 0 ? numeral(fueluppoolApr).format('0.00%') : '-');
 
             updateAllowances();
         }).then(() => {
