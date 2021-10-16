@@ -2706,8 +2706,8 @@
                 ).format('0,0.00'))
 
                 $('#APELP-pool-rewards-GAS-usdvalue').text(numeral(
-                    !stats.poolData[3].internal.rewards[0] ? 0 : ethers.utils.formatEther(
-                        stats.poolData[3].internal.rewards[0]
+                    !stats.poolData[3].internal.rewards[1] ? 0 : ethers.utils.formatEther(
+                        stats.poolData[3].internal.rewards[1]
                             .mul(stats.internal.gasReflectValue)
                             .mul(stats.internal.gasValue)
                             .div(decimals)
