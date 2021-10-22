@@ -898,10 +898,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row mt-4 justify-content-center">
-                <h3 class="text-center">Upcoming Fuel Tanks</h3>
-
                 <div class="col-lg-4 col-sm-6 col-xs-12 justify-content-center p-3">
                     <div class="card" card-default>
                         <div class="card-header text-center" style="padding-bottom: 0;">
@@ -951,7 +947,7 @@
                                     <h6 id="ftmGAS1pool-depositfee"></h6>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p>Presale Mining Ends:</p>
+                                    <p>Presale Mining:</p>
                                     <p><span id="ftmGAS1pool-countdown"></span> <a id="ftmGAS1pool-countdown-url"
                                             href="" target="_blank" rel="noopener noreferrer"><i
                                                 class="fas fa-stopwatch"></i></a></p>
@@ -1025,7 +1021,7 @@
                                     <h6 id="ftmGAS2pool-depositfee"></h6>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p>Presale Mining Ends:</p>
+                                    <p>Presale Mining:</p>
                                     <p><span id="ftmGAS2pool-countdown"></span> <a id="ftmGAS2pool-countdown-url"
                                             href="" target="_blank" rel="noopener noreferrer"><i
                                                 class="fas fa-stopwatch"></i></a></p>
@@ -1052,6 +1048,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row mt-4 justify-content-center" style="display: none;">
+                <h3 class="text-center">Upcoming Fuel Tanks</h3>
             </div>
             <div class="row mt-4 justify-content-center">
                 <h3 class="text-center">Legacy Tanks</h3>
@@ -1748,6 +1747,8 @@
         const maxpoolAmount = $('#max-pool-amount');
         const stableuppoolAmount = $('#stable-pool-amount');
         const fueluppoolAmount = $('#fuel-pool-amount');
+        const ftmgas1poolAmount = $('#ftmGAS1pool-amount');
+        const ftmgas2poolAmount = $('#ftmGAS2pool-amount');
 
 
         const gaspoolStake = $('#gaspool-stake');
@@ -1779,6 +1780,14 @@
         const fueluppoolWithdraw = $('#fuel-pool-withdraw');
         const fueluppoolHarvest = $('#fuel-pool-harvest');
 
+        const ftmgas1poolStake = $('#ftmGAS1pool-stake');
+        const ftmgas1poolWithdraw = $('#ftmGAS1pool-withdraw');
+        const ftmgas1poolHarvest = $('#ftmGAS1pool-harvest');
+
+        const ftmgas2poolStake = $('#ftmGAS2pool-stake');
+        const ftmgas2poolWithdraw = $('#ftmGAS2pool-withdraw');
+        const ftmgas2poolHarvest = $('#ftmGAS2pool-harvest');
+
 
         let gaspoolApproved = false;
         let usdcpoolApproved = false;
@@ -1787,6 +1796,8 @@
         let maxpoolApproved = false;
         let stableuppoolApproved = false;
         let fueluppoolApproved = false;
+        let ftmgas1poolApproved = false;
+        let ftmgas2poolApproved = false;
 
         addTokenBtn.prop("disabled", true);
         connectBtn.prop("disabled", true);
@@ -1859,6 +1870,22 @@
 
             if (stats.poolData[6].rewards[0]) {
                 deposit(6, 0);
+            }
+        });
+
+        ftmgas1poolHarvest.on('click', () => {
+            updateAllowances();
+
+            if (stats.poolData[7].rewards[0]) {
+                deposit(7, 0);
+            }
+        });
+
+        ftmgas2poolHarvest.on('click', () => {
+            updateAllowances();
+
+            if (stats.poolData[8].rewards[0]) {
+                deposit(8, 0);
             }
         });
 
@@ -1937,6 +1964,26 @@
             }
         });
 
+        ftmgas1poolStake.on('click', () => {
+            updateAllowances();
+
+            if (ftmgas1poolApproved) {
+                deposit(7, ethers.utils.parseUnits(ftmgas1poolAmount.val(), stats.poolData[7].internal.stakeDecimals));
+            } else {
+                approve(7);
+            }
+        });
+
+        ftmgas2poolStake.on('click', () => {
+            updateAllowances();
+
+            if (ftmgas2poolApproved) {
+                deposit(8, ethers.utils.parseUnits(ftmgas2poolAmount.val(), stats.poolData[8].internal.stakeDecimals));
+            } else {
+                approve(8);
+            }
+        });
+
         gaspoolWithdraw.on('click', () => {
             if (gaspoolAmount.val()) {
                 withdraw(0, ethers.utils.parseUnits(gaspoolAmount.val()));
@@ -1997,6 +2044,24 @@
             } else if (stats.poolData[6].internal.staked) {
                 const stats = getStats();
                 withdraw(6, stats.poolData[6].internal.staked);
+            }
+        });
+
+        ftmgas1poolWithdraw.on('click', () => {
+            if (ftmgas1poolAmount.val()) {
+                withdraw(7, ethers.utils.parseUnits(ftmgas1poolAmount.val(), stats.poolData[7].internal.stakeDecimals));
+            } else if (stats.poolData[7].internal.staked) {
+                const stats = getStats();
+                withdraw(7, stats.poolData[7].internal.staked);
+            }
+        });
+
+        ftmgas2poolWithdraw.on('click', () => {
+            if (ftmgas2poolAmount.val()) {
+                withdraw(8, ethers.utils.parseUnits(ftmgas2poolAmount.val(), stats.poolData[8].internal.stakeDecimals));
+            } else if (stats.poolData[8].internal.staked) {
+                const stats = getStats();
+                withdraw(8, stats.poolData[8].internal.staked);
             }
         });
 
@@ -2263,6 +2328,78 @@
                 fueluppoolApproved = true;
                 fueluppoolStake.text('STAKE');
             }
+
+            if (stats.poolData[7].rewards[0]) {
+                ftmgas1poolHarvest.removeAttr('disabled');
+            } else {
+                ftmgas1poolHarvest.attr('disabled', 'disabled');
+            }
+
+            if (!ftmgas1poolAmount.val() && (!stats.poolData[7].internal.staked || !stats.poolData[7].internal.staked.gt(0))) {
+                ftmgas1poolStake.attr('disabled', 'disabled');
+                ftmgas1poolWithdraw.attr('disabled', 'disabled');
+            } else if (!ftmgas1poolAmount.val() && stats.poolData[7].internal.staked && stats.poolData[7].internal.staked.gt(0)) {
+                ftmgas1poolStake.attr('disabled', 'disabled');
+                ftmgas1poolWithdraw.text('Withdraw All');
+                ftmgas1poolWithdraw.removeAttr('disabled');
+            } else {
+                ftmgas1poolStake.removeAttr('disabled');
+                ftmgas1poolWithdraw.text('Withdraw');
+                ftmgas1poolWithdraw.removeAttr('disabled');
+            }
+
+            if (stats.poolData[7].stakeAllowance < 0.1) {
+                ftmgas1poolApproved = false;
+                ftmgas1poolStake.text('APPROVE');
+                ftmgas1poolStake.removeAttr('disabled');
+            } else if (ftmgas1poolAmount.val() && stats.poolData[7].stakeAmount < parseInt(ftmgas1poolAmount.val())) {
+                ftmgas1poolApproved = false;
+                ftmgas1poolStake.text('NOT ENOUGH');
+                ftmgas1poolStake.attr('disabled', 'disabled');
+            } else if (ftmgas1poolAmount.val() && stats.poolData[7].stakeAllowance < parseInt(ftmgas1poolAmount.val())) {
+                ftmgas1poolApproved = false;
+                ftmgas1poolStake.text('APPROVE');
+                ftmgas1poolStake.removeAttr('disabled');
+            } else {
+                ftmgas1poolApproved = true;
+                ftmgas1poolStake.text('STAKE');
+            }
+
+            if (stats.poolData[8].rewards[0]) {
+                ftmgas2poolHarvest.removeAttr('disabled');
+            } else {
+                ftmgas2poolHarvest.attr('disabled', 'disabled');
+            }
+
+            if (!ftmgas2poolAmount.val() && (!stats.poolData[8].internal.staked || !stats.poolData[8].internal.staked.gt(0))) {
+                ftmgas2poolStake.attr('disabled', 'disabled');
+                ftmgas2poolWithdraw.attr('disabled', 'disabled');
+            } else if (!ftmgas2poolAmount.val() && stats.poolData[8].internal.staked && stats.poolData[8].internal.staked.gt(0)) {
+                ftmgas2poolStake.attr('disabled', 'disabled');
+                ftmgas2poolWithdraw.text('Withdraw All');
+                ftmgas2poolWithdraw.removeAttr('disabled');
+            } else {
+                ftmgas2poolStake.removeAttr('disabled');
+                ftmgas2poolWithdraw.text('Withdraw');
+                ftmgas2poolWithdraw.removeAttr('disabled');
+            }
+
+            if (stats.poolData[8].stakeAllowance < 0.1) {
+                ftmgas2poolApproved = false;
+                ftmgas2poolStake.text('APPROVE');
+                ftmgas2poolStake.removeAttr('disabled');
+            } else if (ftmgas2poolAmount.val() && stats.poolData[8].stakeAmount < parseInt(ftmgas2poolAmount.val())) {
+                ftmgas2poolApproved = false;
+                ftmgas2poolStake.text('NOT ENOUGH');
+                ftmgas2poolStake.attr('disabled', 'disabled');
+            } else if (ftmgas2poolAmount.val() && stats.poolData[8].stakeAllowance < parseInt(ftmgas2poolAmount.val())) {
+                ftmgas2poolApproved = false;
+                ftmgas2poolStake.text('APPROVE');
+                ftmgas2poolStake.removeAttr('disabled');
+            } else {
+                ftmgas2poolApproved = true;
+                ftmgas2poolStake.text('STAKE');
+            }
         }
 
         gaspoolAmount.on('change', updateAllowances);
@@ -2272,6 +2409,8 @@
         maxpoolAmount.on('change', updateAllowances);
         stableuppoolAmount.on('change', updateAllowances);
         fueluppoolAmount.on('change', updateAllowances);
+        ftmgas1poolAmount.on('change', updateAllowances);
+        ftmgas2poolAmount.on('change', updateAllowances);
 
         // Setups up connection/provider
         configure(() => {
@@ -2308,6 +2447,7 @@
             $('#max-pool-reward-token').text(network == '56' ? "bscGAS" : "polyGAS");
             $('#stable-pool-reward-token').text(network == '56' ? "bscGAS" : "polyGAS");
             $('#fuel-pool-staked-token').text(network == '56' ? "bscGAS" : "polyGAS");
+            $('#ftmGAS1pool-staked-token').text(network == '56' ? "bscGAS" : "polyGAS");
 
             $('#gaspool-depositfee').text(`${pools[network][0].depositFee + pools[network][0].depositBurnFee}%`);
             $('#usdcpool-depositfee').text(`${pools[network][1].depositFee + pools[network][1].depositBurnFee}%`);
@@ -2316,6 +2456,8 @@
             $('#max-pool-depositfee').text(`${pools[network][4].depositFee + pools[network][4].depositBurnFee}%`);
             $('#stable-pool-depositfee').text(`${pools[network][5].depositFee + pools[network][5].depositBurnFee}%`);
             $('#fuel-pool-depositfee').text(`${pools[network][6].depositFee + pools[network][6].depositBurnFee}%`);
+            $('#ftmGAS1pool-depositfee').text(`${pools[network][7].depositFee + pools[network][7].depositBurnFee}%`);
+            $('#ftmGAS2pool-depositfee').text(`${pools[network][8].depositFee + pools[network][8].depositBurnFee}%`);
 
             const gaspoolCountdown = $('#gaspool-countdown');
             const usdcpoolCountdown = $('#usdcpool-countdown');
@@ -2324,6 +2466,8 @@
             const maxpoolCountdown = $('#max-pool-countdown');
             const stableuppoolCountdown = $('#stable-pool-countdown');
             const fueluppoolCountdown = $('#fuel-pool-countdown');
+            const ftmgas1poolCountdown = $('#ftmGAS1pool-countdown');
+            const ftmgas2poolCountdown = $('#ftmGAS2pool-countdown');
 
             const gaspoolCountdownUrl = $('#gaspool-countdown-url');
             const usdcpoolCountdownUrl = $('#usdcpool-countdown-url');
@@ -2332,6 +2476,8 @@
             const maxpoolCountdownUrl = $('#max-pool-countdown-url');
             const stableuppoolCountdownUrl = $('#stable-pool-countdown-url');
             const fueluppoolCountdownUrl = $('#fuel-pool-countdown-url');
+            const ftmgas1poolCountdownUrl = $('#ftmGAS1pool-countdown-url');
+            const ftmgas2poolCountdownUrl = $('#ftmGAS2pool-countdown-url');
 
             if (stats.block) {
                 gaspoolCountdown.parent().show();
@@ -2341,6 +2487,8 @@
                 maxpoolCountdown.parent().show();
                 stableuppoolCountdown.parent().show();
                 fueluppoolCountdown.parent().show();
+                ftmgas1poolCountdown.parent().show();
+                ftmgas2poolCountdown.parent().show();
 
                 if (pools[network][0].startBlock > stats.block) {
                     gaspoolCountdown.text(`Starts in ${pools[network][0].startBlock - stats.block}`);
@@ -2411,6 +2559,26 @@
                 } else {
                     fueluppoolCountdown.parent().html('Finished!')
                 }
+
+                if (pools[network][7].startBlock > stats.block) {
+                    ftmgas1poolCountdown.text(`Starts in ${pools[network][7].startBlock - stats.block}`);
+                    ftmgas1poolCountdownUrl.attr('href', `${tokens[network].countdownUrl}${pools[network][7].startBlock}`);
+                } else if (pools[network][7].endBlock > stats.block) {
+                    ftmgas1poolCountdown.text(`Ends in ${pools[network][7].endBlock - stats.block}`);
+                    ftmgas1poolCountdownUrl.attr('href', `${tokens[network].countdownUrl}${pools[network][7].endBlock}`);
+                } else {
+                    ftmgas1poolCountdown.parent().html('Finished!')
+                }
+
+                if (pools[network][8].startBlock > stats.block) {
+                    ftmgas2poolCountdown.text(`Starts in ${pools[network][8].startBlock - stats.block}`);
+                    ftmgas2poolCountdownUrl.attr('href', `${tokens[network].countdownUrl}${pools[network][8].startBlock}`);
+                } else if (pools[network][8].endBlock > stats.block) {
+                    ftmgas2poolCountdown.text(`Ends in ${pools[network][8].endBlock - stats.block}`);
+                    ftmgas2poolCountdownUrl.attr('href', `${tokens[network].countdownUrl}${pools[network][8].endBlock}`);
+                } else {
+                    ftmgas2poolCountdown.parent().html('Finished!')
+                }
             } else {
                 gaspoolCountdown.parent().hide();
                 usdcpoolCountdown.parent().hide();
@@ -2419,6 +2587,8 @@
                 maxpoolCountdown.parent().hide();
                 stableuppoolCountdown.parent().hide();
                 fueluppoolCountdown.parent().hide();
+                ftmgas1poolCountdown.parent().hide();
+                ftmgas2poolCountdown.parent().hide();
             }
 
             $('#gaspool-staked').text(numeral(stats.poolData[0].staked).format('0,0.000'));
@@ -2428,6 +2598,8 @@
             $('#max-pool-staked').text(numeral(stats.poolData[4].staked).format('0,0.000'));
             $('#stable-pool-staked').text(numeral(stats.poolData[5].staked).format('$0,0.000000'));
             $('#fuel-pool-staked').text(numeral(stats.poolData[6].staked).format('0,0.000'));
+            $('#ftmGAS1pool-staked').text(numeral(stats.poolData[7].staked).format('0,0.000'));
+            $('#ftmGAS2pool-staked').text(numeral(stats.poolData[8].staked).format('$0,0.000000'));
 
             $('#gaspool-rewards').text(numeral(stats.poolData[0].rewards[0]).format('$0,0.000'));
             $('#usdcpool-rewards').text(numeral(stats.poolData[1].rewards[0]).format('0,0.000'));
@@ -2437,6 +2609,8 @@
             $('#max-pool-rewards').text(numeral(stats.poolData[4].rewards[0]).format('0,0.000'));
             $('#stable-pool-rewards').text(numeral(stats.poolData[5].rewards[0]).format('0,0.000'));
             $('#fuel-pool-rewards').text(numeral(stats.poolData[6].rewards[0]).format('$0,0.000'));
+            $('#ftmGAS1pool-rewards').text(numeral(stats.poolData[7].rewards[0]).format('0,0.000'));
+            $('#ftmGAS2pool-rewards').text(numeral(stats.poolData[7].rewards[0]).format('0,0.000'));
 
             let gaspoolApr = 0;
             let usdcpoolApr = 0;
@@ -2445,6 +2619,8 @@
             let maxpoolApr = 0;
             let stableuppoolApr = 0;
             let fueluppoolApr = 0;
+            let ftmgas1poolApr = 0;
+            let ftmgas2poolApr = 0;
 
             if (stats.internal.gasReflectValue && stats.internal.gasValue) {
                 $('#tvl').text(numeral(
@@ -2516,6 +2692,25 @@
                                         .mul(stats.internal.gasValue)
                                         .div(decimals)
                                         .div(decimals)
+                            )
+                            .add(
+                                !stats.poolData[7].internal.totalStaked || !stats.poolData[7].internal.totalStaked.gt(0)
+                                    ? ethers.BigNumber.from(0)
+                                    : stats.poolData[7].internal.totalStaked
+                                        .mul(stats.internal.gasReflectValue)
+                                        .mul(stats.internal.gasValue)
+                                        .div(decimals)
+                                        .div(decimals)
+                            )
+                            .add(
+                                !stats.poolData[8].internal.totalStaked || !stats.poolData[8].internal.totalStaked.gt(0)
+                                    ? ethers.BigNumber.from(0)
+                                    : stats.poolData[8].internal.totalStaked
+                                        .mul(
+                                            ethers.BigNumber.from(10).pow(
+                                                18 - tokens[network].stableDecimals
+                                            )
+                                        )
                             )
                     )
                 ).format('$0,0.00'));
@@ -2589,6 +2784,25 @@
                                         .mul(stats.internal.gasValue)
                                         .div(decimals)
                                         .div(decimals)
+                            )
+                            .add(
+                                !stats.poolData[7].internal.staked || !stats.poolData[7].internal.staked.gt(0)
+                                    ? ethers.BigNumber.from(0)
+                                    : stats.poolData[7].internal.staked
+                                        .mul(stats.internal.gasReflectValue)
+                                        .mul(stats.internal.gasValue)
+                                        .div(decimals)
+                                        .div(decimals)
+                            )
+                            .add(
+                                !stats.poolData[8].internal.staked || !stats.poolData[8].internal.staked.gt(0)
+                                    ? ethers.BigNumber.from(0)
+                                    : stats.poolData[8].internal.staked
+                                        .mul(
+                                            ethers.BigNumber.from(10).pow(
+                                                18 - tokens[network].stableDecimals
+                                            )
+                                        )
                             )
                     )
                 ).format('$0,0.00'));
@@ -2872,6 +3086,28 @@
                             .div(decimals)
                     ).toNumber() / 10000;
                 }
+
+                $('#ftmGAS1pool-total-staked').text(numeral(
+                    !stats.poolData[7].internal.totalStaked ? 0 : ethers.utils.formatEther(
+                        stats.poolData[7].internal.totalStaked
+                    )
+                ).format('0,0.00'))
+
+                $('#ftmGAS1pool-staked-usd').text(numeral(
+                    !stats.poolData[7].internal.staked ? 0 : ethers.utils.formatEther(
+                        stats.poolData[7].internal.staked
+                            .mul(stats.internal.gasReflectValue)
+                            .mul(stats.internal.gasValue)
+                            .div(decimals)
+                            .div(decimals)
+                    )
+                ).format('$0,0.00a'))
+
+                $('#ftmGAS2pool-total-staked').text(numeral(
+                    !stats.poolData[8].internal.totalStaked ? 0 : ethers.utils.formatEther(
+                        stats.poolData[8].internal.totalStaked
+                    )
+                ).format('0,0.00'))
             }
 
             $('#gaspool-apr').text(gaspoolApr > 0 ? numeral(gaspoolApr).format('0.00%') : '-');
@@ -2879,8 +3115,8 @@
             $('#usdc2pool-apr').text(usdc2poolApr > 0 ? numeral(usdc2poolApr).format('0.00%') : '-');
             $('#APELP-pool-apr').text(apelppoolApr > 0 ? numeral(apelppoolApr).format('0.00%') : '-');
             $('#max-pool-apr').text(maxpoolApr > 0 ? numeral(maxpoolApr).format('0.00%') : '-');
-            $('#stable-pool-apr').text(maxpoolApr > 0 ? numeral(stableuppoolApr).format('0.00%') : '-');
-            $('#fuel-pool-apr').text(maxpoolApr > 0 ? numeral(fueluppoolApr).format('0.00%') : '-');
+            $('#stable-pool-apr').text(stableuppoolApr > 0 ? numeral(stableuppoolApr).format('0.00%') : '-');
+            $('#fuel-pool-apr').text(fueluppoolApr > 0 ? numeral(fueluppoolApr).format('0.00%') : '-');
 
             updateAllowances();
         }).then(() => {
