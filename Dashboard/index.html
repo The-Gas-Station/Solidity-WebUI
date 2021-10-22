@@ -3105,7 +3105,11 @@
 
                 $('#ftmGAS2pool-total-staked').text(numeral(
                     !stats.poolData[8].internal.totalStaked ? 0 : ethers.utils.formatEther(
-                        stats.poolData[8].internal.totalStaked
+                        stats.poolData[8].internal.totalStaked.mul(
+                            ethers.BigNumber.from(10).pow(
+                                18 - tokens[network].stableDecimals
+                            )
+                        )
                     )
                 ).format('0,0.00'))
             }
