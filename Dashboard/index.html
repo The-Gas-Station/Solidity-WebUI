@@ -2889,7 +2889,7 @@
                             .add(
                                 !stats.poolData[3].internal.staked || !stats.poolData[3].internal.staked.gt(0)
                                     ? ethers.BigNumber.from(0)
-                                    : stats.poolData[2].internal.staked
+                                    : stats.poolData[3].internal.staked
                                         .mul(stats.internal.percentA)
                                         .mul(stats.internal.gasValue)
                                         .div(decimals)
