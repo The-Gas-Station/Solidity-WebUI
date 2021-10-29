@@ -26,7 +26,7 @@ const tokens = {
     blockCreated: 17732765,
     provider: null,
     lpAddress: "0x2637ce16e98fcc66f2ccdd36087defdcf955b68a",
-    extraLpAddresses: [],
+    extraLpAddresses: ["0x993e0342A307D0aC7E16d8b0ae0262F237EC1b4B"],
     gasAddress: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
     gasLpAddress: "0xcd353F79d9FADe311fC3119B841e1f456b54e858",
     stableDecimals: 6,
