@@ -5,7 +5,7 @@ const tokens = {
     address: "0x6fabfe7946b23da23ad51dc45167cc2cfd0ce70e",
     symbol: "bscGAS",
     decimals: 18,
-    image: "https://imgur.com/is3daqb.png",
+    image: "https://hub.gasstationcrypto.com/token.svg",
     rpcUrls: ["https://bsc-dataseed2.binance.org"],
     provider: null,
     stableDecimals: 18,
@@ -17,11 +17,23 @@ const tokens = {
     address: "0x840b5fc8c6dee2b1140174a3abdc215190426ccf",
     symbol: "polyGAS",
     decimals: 18,
-    image: "https://imgur.com/is3daqb.png",
+    image: "https://hub.gasstationcrypto.com/token.svg",
     rpcUrls: ["https://polygon-rpc.com/"],
     provider: null,
     stableDecimals: 6,
     blockExplorerUrls: ["https://polygonscan.com/"],
+  },
+  250: {
+    nfp: "0xDBD9BfcB77B6a0477411282022FEE2CF81f06cd6",
+    usdc: "0x04068da6c83afcfa0e13ba15a6696662335d5b75",
+    address: "0x6741db012578615Ee07e029C1062B46730093912",
+    symbol: "ftmGAS",
+    decimals: 18,
+    image: "https://hub.gasstationcrypto.com/token.svg",
+    rpcUrls: ["https://rpc.ftm.tools/"],
+    provider: null,
+    stableDecimals: 6,
+    blockExplorerUrls: ["https://ftmscan.com/"],
   },
 };
 
@@ -709,16 +721,33 @@ async function switchNetwork(_network, callback) {
           });
         } catch (e) {
           if (e.code == 4902) {
+            let networkName = "";
+            let networkTokenName = "";
+            let networkTokenSymbol = "";
+
+            if (network == "137") {
+              networkName = "Polygon Network";
+              networkTokenName = "Matic";
+              networkTokenSymbol = "MATIC";
+            } else if (network == "250") {
+              networkName = "Fantom Opera Network";
+              networkTokenName = "Fantom";
+              networkTokenSymbol = "FTM";
+            } else {
+              networkName = "Binance Smart Chain";
+              networkTokenName = "BNB";
+              networkTokenSymbol = "BNB";
+            }
+
             await ethereum.request({
               method: "wallet_addEthereumChain",
               params: [
                 {
                   chainId: `0x${parseInt(network, 10).toString(16)}`,
-                  chainName:
-                    network == "56" ? "Binance Smart Chain" : "Polygon Network",
+                  chainName: networkName,
                   nativeCurrency: {
-                    name: network == "56" ? "BNB" : "Matic",
-                    symbol: network == "56" ? "BNB" : "Matic",
+                    name: networkTokenName,
+                    symbol: networkTokenSymbol,
                     decimals: 18,
                   },
                   rpcUrls: tokens[network].rpcUrls,

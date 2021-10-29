@@ -35,6 +35,24 @@ const tokens = {
     usdc: "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
     blocksPerYear: (60 / 2) * 60 * 24 * 365,
   },
+  250: {
+    address: "0x6741db012578615Ee07e029C1062B46730093912",
+    symbol: "ftmGAS",
+    decimals: 18,
+    image: "https://hub.gasstationcrypto.com/token.svg",
+    rpcUrls: ["https://rpc.ftm.tools/"],
+    blockCreated: 20080908,
+    provider: null,
+    lpAddress: "0x2ae4249f5a33a3ceadc10ddcbc5a9e8abe7680ef",
+    extraLpAddresses: [],
+    gasAddress: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+    gasLpAddress: "0x2b4C76d0dc16BE1C31D4C1DC53bF9B45987Fc75c",
+    stableDecimals: 6,
+    blockExplorerUrls: ["https://ftmscan.com/"],
+    countdownUrl: "https://ftmscan.com/block/countdown/",
+    usdc: "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
+    blocksPerYear: (60 / 2) * 60 * 24 * 365,
+  },
 };
 
 const pools = {
@@ -210,6 +228,53 @@ const pools = {
       depositBurnFee: 0,
       startBlock: 20518900,
       endBlock: 20730000,
+    },
+  ],
+  250: [
+    false,
+    false,
+    false,
+    {
+      address: "0xFb6db9c955a2F1062b5584AbCEE8Cf4c975896F6",
+      type: "dual",
+      staked: "0x2ae4249f5a33a3ceadc10ddcbc5a9e8abe7680ef",
+      rewards: [
+        "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83",
+        "0x6741db012578615ee07e029c1062b46730093912",
+      ],
+      depositFee: 0,
+      depositBurnFee: 1,
+      startBlock: 20650000,
+      endBlock: 28550000,
+    },
+    false,
+    {
+      address: "0xfA44e0Bf61c46221BFfAa60F59E82e2319491929",
+      staked: "0x04068da6c83afcfa0e13ba15a6696662335d5b75",
+      reward: "0x6741db012578615ee07e029c1062b46730093912",
+      depositFee: 5,
+      depositBurnFee: 0,
+      startBlock: 20950000,
+      endBlock: 37550000,
+    },
+    {
+      address: "0xe16D22501049Ebdd9bE44DDE377ffe2E945dF017",
+      staked: "0x6741db012578615ee07e029c1062b46730093912",
+      reward: "0x04068da6c83afcfa0e13ba15a6696662335d5b75",
+      depositFee: 1,
+      depositBurnFee: 4,
+      startBlock: 20650000,
+      endBlock: 37550000,
+    },
+    false,
+    {
+      address: "0xcC9808bC4Dc0115fBC8C3B9C99f900aD470e2d0D",
+      staked: "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83",
+      reward: "0x6741db012578615ee07e029c1062b46730093912",
+      depositFee: 5,
+      depositBurnFee: 0,
+      startBlock: 20950000,
+      endBlock: 37550000,
     },
   ],
 };
@@ -997,6 +1062,9 @@ async function configure(statsUpdatedCallback) {
   tokens["137"].provider = new ethers.providers.JsonRpcProvider(
     tokens["137"].rpcUrls[0]
   );
+  tokens["250"].provider = new ethers.providers.JsonRpcProvider(
+    tokens["250"].rpcUrls[0]
+  );
 
   provider = await detectEthereumProvider();
 
@@ -1515,7 +1583,10 @@ async function refreshBlockData() {
 }
 
 async function refreshPoolTokens(poolId) {
-  if (refreshData.poolData[poolId].tokens.refreshing) {
+  if (
+    !pools[network][poolId] ||
+    refreshData.poolData[poolId].tokens.refreshing
+  ) {
     return;
   }
 
@@ -1602,7 +1673,10 @@ async function refreshPoolTokens(poolId) {
 }
 
 async function refreshPoolStaked(poolId) {
-  if (refreshData.poolData[poolId].staked.refreshing) {
+  if (
+    !pools[network][poolId] ||
+    refreshData.poolData[poolId].staked.refreshing
+  ) {
     return;
   }
 
@@ -1644,7 +1718,10 @@ async function refreshPoolStaked(poolId) {
 }
 
 async function refreshPoolRewards(poolId) {
-  if (refreshData.poolData[poolId].rewards.refreshing) {
+  if (
+    !pools[network][poolId] ||
+    refreshData.poolData[poolId].rewards.refreshing
+  ) {
     return;
   }
 
@@ -1705,7 +1782,10 @@ async function refreshPoolRewards(poolId) {
 }
 
 async function refreshPoolTotalStaked(poolId) {
-  if (refreshData.poolData[poolId].totalStaked.refreshing) {
+  if (
+    !pools[network][poolId] ||
+    refreshData.poolData[poolId].totalStaked.refreshing
+  ) {
     return;
   }
 
@@ -1742,7 +1822,10 @@ async function refreshPoolTotalStaked(poolId) {
 }
 
 async function refreshPoolRewardsPerBlock(poolId) {
-  if (refreshData.poolData[poolId].rewardsPerBlock.refreshing) {
+  if (
+    !pools[network][poolId] ||
+    refreshData.poolData[poolId].rewardsPerBlock.refreshing
+  ) {
     return;
   }
 
@@ -1883,16 +1966,33 @@ async function switchNetwork(_network, callback) {
           });
         } catch (e) {
           if (e.code == 4902) {
+            let networkName = "";
+            let networkTokenName = "";
+            let networkTokenSymbol = "";
+
+            if (network == "137") {
+              networkName = "Polygon Network";
+              networkTokenName = "Matic";
+              networkTokenSymbol = "MATIC";
+            } else if (network == "250") {
+              networkName = "Fantom Opera Network";
+              networkTokenName = "Fantom";
+              networkTokenSymbol = "FTM";
+            } else {
+              networkName = "Binance Smart Chain";
+              networkTokenName = "BNB";
+              networkTokenSymbol = "BNB";
+            }
+
             await ethereum.request({
               method: "wallet_addEthereumChain",
               params: [
                 {
                   chainId: `0x${parseInt(network, 10).toString(16)}`,
-                  chainName:
-                    network == "56" ? "Binance Smart Chain" : "Polygon Network",
+                  chainName: networkName,
                   nativeCurrency: {
-                    name: network == "56" ? "BNB" : "Matic",
-                    symbol: network == "56" ? "BNB" : "Matic",
+                    name: networkTokenName,
+                    symbol: networkTokenSymbol,
                     decimals: 18,
                   },
                   rpcUrls: tokens[network].rpcUrls,
