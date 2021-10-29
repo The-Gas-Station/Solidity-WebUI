@@ -610,7 +610,8 @@
                                             <br />
                                             (<span id="APELP-pool-staked-usd">0</span>)
                                         </span>
-                                        <img src="./img/ape-home.svg" class="avatar avatar me-3" alt="logo">
+                                        <img src="./img/ape-home.svg" class="avatar avatar me-3 APELP-pool-staked-img"
+                                            alt="logo">
                                     </p>
                                 </div>
                             </div>
@@ -2488,12 +2489,14 @@
 
             if (network == '250') {
                 $('.legacy-tanks-wrapper').hide();
+                $('.APELP-pool-staked-img').attr('src', './img/spookyswap.png');
                 $('#APELP-pool-reward-token1').text('WFTM');
                 $('.APELP-pool-rewards-USDC-img').attr('src', './assets/img/ftm.svg');
                 $('#ftmGAS2pool-staked-token').text('WFTM');
                 $('.ftmGAS2pool-staked-img').attr('src', './assets/img/ftm.svg');
             } else {
                 $('.legacy-tanks-wrapper').show();
+                $('.APELP-pool-staked-img').attr('src', './img/ape-home.svg');
                 $('#APELP-pool-reward-token1').text('USDC');
                 $('.APELP-pool-rewards-USDC-img').attr('src', './assets/img/usdc.png');
                 $('#ftmGAS2pool-staked-token').text('USDC');
