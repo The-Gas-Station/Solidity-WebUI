@@ -585,7 +585,7 @@
                 <div class="col-lg-4 col-sm-6 col-xs-12 justify-content-center p-3 APELP-pool-wrapper">
                     <div class="card" card-default>
                         <div class="card-header text-center" style="padding-bottom: 0;">
-                            <h5>Dual Fuel (APE-LP)</h5>
+                            <h5>Dual Fuel (<span id="APELP-pool-lptype">APE-LP</span>)</h5>
                             <h6>Stake <span id="APELP-pool-staked-token">APE-LP</span>, Earn <span
                                     id="APELP-pool-reward-token1">USDC</span> +
                                 <span id="APELP-pool-reward-token2">GAS</span>
@@ -2502,6 +2502,7 @@
 
             if (network == '250') {
                 $('.legacy-tanks-wrapper').hide();
+                $("#APELP-pool-lptype").text('SPOOKY-LP');
                 $('.APELP-pool-staked-img').attr('src', './img/spookyswap.png');
                 $('#APELP-pool-reward-token1').text('WFTM');
                 $('.APELP-pool-rewards-USDC-img').attr('src', './assets/img/ftm.svg');
@@ -2512,6 +2513,7 @@
                 $('.ftmGAS2pool-staked-img').attr('src', './assets/img/ftm.svg');
             } else {
                 $('.legacy-tanks-wrapper').show();
+                $("#APELP-pool-lptype").text('APE-LP');
                 $('.APELP-pool-staked-img').attr('src', './img/ape-home.svg');
                 $('#APELP-pool-reward-token1').text('USDC');
                 $('.APELP-pool-rewards-USDC-img').attr('src', './assets/img/usdc.png');
