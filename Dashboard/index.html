@@ -2738,13 +2738,13 @@
             $('#usdcpool-rewards').text(numeral(stats.poolData[1].rewards[0]).format('0,0.000'));
             $('#usdc2pool-rewards').text(numeral(stats.poolData[2].rewards[0]).format('0,0.000'));
             if (network == '250') {
-                $('#APELP-pool-rewards-USDC').text(numeral(stats.poolData[3].rewards[0]).format('0,0.000'));
+                $('#APELP-pool-rewards-USDC').text(numeral(stats.poolData[3].rewards[1]).format('0,0.000'));
                 $('#APELP-pool-rewards-USDC-usdvalue-section').show();
             } else {
                 $('#APELP-pool-rewards-USDC').text(numeral(stats.poolData[3].rewards[0]).format('$0,0.000'));
                 $('#APELP-pool-rewards-USDC-usdvalue-section').hide();
             }
-            $('#APELP-pool-rewards-GAS').text(numeral(stats.poolData[3].rewards[1]).format('0,0.000 a'));
+            $('#APELP-pool-rewards-GAS').text(numeral(stats.poolData[3].rewards[network != "250" ? 1 : 0]).format('0,0.000 a'));
             $('#max-pool-rewards').text(numeral(stats.poolData[4].rewards[0]).format('0,0.000'));
             $('#stable-pool-rewards').text(numeral(stats.poolData[5].rewards[0]).format('0,0.000'));
             $('#fuel-pool-rewards').text(numeral(stats.poolData[6].rewards[0]).format('$0,0.000'));
@@ -3063,11 +3063,11 @@
                 ).format('0,0.00'))
 
                 $('#APELP-pool-rewards-USDC-usdvalue').text(numeral(
-                    !stats.poolData[3].internal.rewards[0] ? 0 : ethers.utils.formatEther(
-                        stats.poolData[3].internal.rewards[0]
+                    !stats.poolData[3].internal.rewards[network != "250" ? 0 : 1] ? 0 : ethers.utils.formatEther(
+                        stats.poolData[3].internal.rewards[network != "250" ? 0 : 1]
                             .mul(
                                 ethers.BigNumber.from(10).pow(
-                                    18 - stats.poolData[3].internal.rewardTokenDecimals[0]
+                                    18 - stats.poolData[3].internal.rewardTokenDecimals[network != "250" ? 0 : 1]
                                 )
                             )
                             .mul(network != '250' ? 1 : stats.internal.gasValue)
@@ -3076,8 +3076,8 @@
                 ).format('$0,0.00a'))
 
                 $('#APELP-pool-rewards-GAS-usdvalue').text(numeral(
-                    !stats.poolData[3].internal.rewards[1] ? 0 : ethers.utils.formatEther(
-                        stats.poolData[3].internal.rewards[1]
+                    !stats.poolData[3].internal.rewards[network != "250" ? 1 : 0] ? 0 : ethers.utils.formatEther(
+                        stats.poolData[3].internal.rewards[network != "250" ? 1 : 0]
                             .mul(stats.internal.gasReflectValue)
                             .mul(stats.internal.gasValue)
                             .div(decimals)
@@ -3096,12 +3096,12 @@
                     )
                 ).format('$0,0.00a'))
 
-                if (stats.poolData[3].internal.rewardsPerBlock[0] && stats.poolData[3].internal.totalStaked && stats.poolData[3].internal.totalStaked.gt(0)) {
+                if (stats.poolData[3].internal.rewardsPerBlock[network != "250" ? 0 : 1] && stats.poolData[3].internal.totalStaked && stats.poolData[3].internal.totalStaked.gt(0)) {
                     apelppoolApr += (
-                        stats.poolData[3].internal.rewardsPerBlock[0].mul(tokens[network].blocksPerYear)
+                        stats.poolData[3].internal.rewardsPerBlock[network != "250" ? 0 : 1].mul(tokens[network].blocksPerYear)
                             .mul(
                                 ethers.BigNumber.from(10).pow(
-                                    18 - stats.poolData[3].internal.rewardTokenDecimals[0]
+                                    18 - stats.poolData[3].internal.rewardTokenDecimals[network != "250" ? 0 : 1]
                                 )
                             )
                             .mul(network != '250' ? 1 : stats.internal.gasValue)
@@ -3116,9 +3116,9 @@
                     ).toNumber() / 10000;
                 }
 
-                if (stats.poolData[3].internal.rewardsPerBlock[1] && stats.poolData[3].internal.totalStaked && stats.poolData[3].internal.totalStaked.gt(0)) {
+                if (stats.poolData[3].internal.rewardsPerBlock[network != "250" ? 1 : 0] && stats.poolData[3].internal.totalStaked && stats.poolData[3].internal.totalStaked.gt(0)) {
                     apelppoolApr += (
-                        stats.poolData[3].internal.rewardsPerBlock[1].mul(tokens[network].blocksPerYear)
+                        stats.poolData[3].internal.rewardsPerBlock[network != "250" ? 1 : 0].mul(tokens[network].blocksPerYear)
                             .mul(stats.internal.gasReflectValue)
                             .mul(stats.internal.gasValue)
                             .div(decimals)
