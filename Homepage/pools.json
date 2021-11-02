@@ -1,30 +1,56 @@
 {
-    "bsc": [
-        {
-            "name" : "Stable-Up! (bscGAS->USDC)",
-            "address": "0xD9D8209dC88CB96D0a300C2ab2479608A8D1463d"
-        },
-        {
-            "name" : "Fuel-Up! (USDC->bscGAS)",
-            "address": "0x0124378207aF3E62D842f66B5af02dF5e4F9719C"
-        },
-        {
-            "name" : "Fuel-Up! (USDC->bscGAS)",
-            "address": "0x8a96E5E22e2b057b9c7e7474B95D02bd9B2D0628"
-        }
-    ],
-    "polygon": [
-        {
-            "name" : "Stable-Up! (polyGAS->USDC)",
-            "address": "0x2bC0Bf8E98C7BBF08dD682B3Ed0dA50991AA66BD"
-        },
-        {
-            "name" : "Fuel-Up! (USDC->polyGAS)",
-            "address": "0x20024f775Ab6bc96077c73Fb2E45C8862aC35552"
-        },
-        {
-            "name" : "Fuel-Up! (USDC->polyGAS)",
-            "address": "0x543B1da3a789bd9e72142ce7B7b320DbD4dDEa0a"
-        }
-    ]
+  "bsc": [
+    {
+      "name": "Dual Fuel (APE-LP->USDC+bscGAS)",
+      "address": "0xB1B058236C20A808Bd2277DB4C0D092468e6b626"
+    },
+    {
+      "name": "Gas Maximizer (bscGAS->bscGAS)",
+      "address": "0xE9916A99787b9f8a86116d86f900e18aF0a2aA51"
+    },
+    {
+      "name": "Fuel-Up! (USDC->bscGAS)",
+      "address": "0xE35408BCD80Ab6A2954fD2858Ef4B96F2Da83F75"
+    },
+    {
+      "name": "Stable-Up! (bscGAS->USDC)",
+      "address": "0x09c85d6F3b9Aa02314A839E69d6725A050678AbE"
+    }
+  ],
+  "polygon": [
+    {
+      "name": "Dual Fuel (APE-LP->USDC+polyGAS)",
+      "address": "0x38816Ccf336E53783d2661Ca8F6115b435ae74B3"
+    },
+    {
+      "name": "Gas Maximizer (polyGAS->polyGAS)",
+      "address": "0xBE9bEAc00d0a495Cb3482Fb22a9dc874305262E2"
+    },
+    {
+      "name": "Fuel-Up! (USDC->polyGAS)",
+      "address": "0xE454a4262Cd345C4DA97B46AcAC7F8F2e6D3b3dD"
+    },
+    {
+      "name": "Stable-Up! (polyGAS->USDC)",
+      "address": "0x196986cbD3E4C9Ff4372F419BC94C43B49dB0A0c"
+    }
+  ],
+  "fantom": [
+    {
+      "name": "Dual Fuel (SPOOKY-LP->WFTM+ftmGAS)",
+      "address": "0xFb6db9c955a2F1062b5584AbCEE8Cf4c975896F6"
+    },
+    {
+      "name": "Fuel-Up! (USDC->ftmGAS)",
+      "address": "0xfA44e0Bf61c46221BFfAa60F59E82e2319491929"
+    },
+    {
+      "name": "Stable-Up! (ftmGAS->USDC)",
+      "address": "0xe16D22501049Ebdd9bE44DDE377ffe2E945dF017"
+    },
+    {
+      "name": "ftmGAS Liquidity Mining! (WFTM->ftmGAS)",
+      "address": "0xcC9808bC4Dc0115fBC8C3B9C99f900aD470e2d0D"
+    }
+  ]
 }
