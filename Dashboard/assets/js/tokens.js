@@ -51,7 +51,7 @@ const tokens = {
     blockExplorerUrls: ["https://ftmscan.com/"],
     countdownUrl: "https://ftmscan.com/block/countdown/",
     usdc: "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
-    blocksPerYear: (60 / 2) * 60 * 24 * 365,
+    blocksPerYear: 60 * 60 * 24 * 365,
   },
 };
 
